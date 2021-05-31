@@ -4,5 +4,9 @@ export const TYPES = {
     TABLE: Symbol.for('TABLE'),
     APPLICATION: Symbol.for('APPLICATION'),
     ROUTER: Symbol.for('ROUTER'),
-    MIDDLEWARE: Symbol.for('MIDDLEWARE')
+    MIDDLEWARE: Symbol.for('MIDDLEWARE'),
+    CONFIG: Symbol.for('CONFIG'),
+    LOGGER: Symbol.for('LOGGER'),
+    HTTP: Symbol.for('HTTP'),
+    API: Symbol.for('API')
 }

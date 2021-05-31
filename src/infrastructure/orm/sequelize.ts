@@ -1,0 +1,22 @@
+export {
+    Sequelize,
+    DataTypes,
+    Options,
+    Op,
+    DataTypeAbstract,
+    ModelAttributes,
+    ModelOptions,
+    JSONB,
+    DOUBLE,
+    JSON,
+    cast,
+    where,
+    and,
+    col,
+    FindOptions,
+    CountOptions,
+    Model,
+    fn,
+    BuildOptions,
+    Transaction
+  } from 'sequelize';

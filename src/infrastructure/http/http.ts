@@ -1,7 +1,6 @@
 import express from 'express'
-import { Application } from 'express'
-import { Server } from 'http'
-import { multiInject } from 'inversify';
+
+import { injectable, multiInject } from '../ioc';
 import { TYPES } from '../../const';
 
 export interface IHttp {
@@ -11,23 +10,27 @@ export interface IHttp {
 
 const SERVER = express()
 
+@injectable()
 export class Http implements IHttp {
     static SERVER = SERVER;
 
-    private http: Application;
-    private server: Server;
+    protected server = SERVER;
 
     @multiInject(TYPES.MIDDLEWARE)
     protected middlewares: any[] | undefined;
     
-    @multiInject(TYPES.ROUTER)
-    protected routers: any[] | undefined;
+    // @multiInject(TYPES.ROUTER)
+    // protected routers: any[] | undefined;
 
     public load() {
-        if(this.middlewares && this.routers) {
-            this.middlewares.forEach(middleware => middleware.load());
-            this.routers.forEach(router => router.load())
+        if(this.middlewares) {
+            this.middlewares.forEach(middleware =>{ 
+                console.log(middleware)    
+                middleware.load()
+            });
+        //     this.routers.forEach(router => router.load())
         }
+        return
     }
 
     public listen(port: number): void {

@@ -1,0 +1,82 @@
+{
+    "web": {
+        "port": 3000
+    },
+    "log": {
+        "appenders": {
+            "file": {
+                "type": "dateFile",
+                "pattern": ".yyyyMMdd",
+                "filename": "../logs/api.monitor.log",
+                "daysToKeep": 15,
+                "layout": {
+                    "type": "pattern",
+                    "pattern": "%[[%d] [%p] [%c::%X{context}]%] - %m"
+                }
+            },
+            "out": {
+                "type": "stdout",
+                "layout": {
+                    "type": "pattern",
+                    "pattern": "%[[%d] [%p] [%c::%X{context}]%] - %m"
+                }
+            }
+        },
+        "categories": {
+            "APPLICATION": {
+                "appenders": [
+                    "out"
+                ],
+                "level": "info"
+            },
+            "INFRASTRUCTURE": {
+                "appenders": [
+                    "out"
+                ],
+                "level": "info"
+            },
+            "USECASE": {
+                "appenders": [
+                    "out"
+                ],
+                "level": "info"
+            },
+            "DOMAIN": {
+                "appenders": [
+                    "out"
+                ],
+                "level": "info"
+            },
+            "DELIVERY": {
+                "appenders": [
+                    "out"
+                ],
+                "level": "info"
+            },
+            "default": {
+                "appenders": [
+                    "out"
+                ],
+                "level": "info"
+            }
+        }
+    },
+    "postgres": {
+        "info": {
+            "read": {
+                "username": "postgres",
+                "password": "hoan.123456",
+                "database": "furniture-master-read",
+                "host": "localhost",
+                "dialect": "postgres"
+            },
+            "write": {
+                "username": "postgres",
+                "password": "hoan.123456",
+                "database": "furniture-master-read",
+                "host": "localhost",
+                "dialect": "postgres"
+            }
+        }
+    }
+}
