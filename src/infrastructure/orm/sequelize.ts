@@ -18,5 +18,7 @@ export {
     Model,
     fn,
     BuildOptions,
-    Transaction
+    Transaction,
+    WhereOptions, 
+    IncludeOptions
   } from 'sequelize';

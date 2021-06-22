@@ -1,20 +1,17 @@
-import { BaseMiddleware } from "../base"
-import { singletonProvide } from '../../../ioc'
-import { TYPES } from "../../../../const"
+import bodyParser from 'body-parser';
 
-import express from 'express'
-
+import { TYPES } from '../../../../const';
+import { singletonProvide, inject } from '../../../ioc';
+import { BaseMiddleware } from '../../middleware/base';
 
 @singletonProvide(TYPES.MIDDLEWARE)
 export class BodyParserMiddleware extends BaseMiddleware {
-    constructor() {
-        super()
+  constructor() {
+    super();
+    this.middleware.use(bodyParser.json())
+  }
 
-        this.middleware.use(express.urlencoded())
-        this.middleware.use(express.json())
-    }
-
-    get id() {
-        return Symbol.for('BODY_PARSER_MIDDLEWARE')
-    }
+  get id() {
+    return Symbol.for('BODY_PARSER_MIDDLEWARE');
+  }
 }

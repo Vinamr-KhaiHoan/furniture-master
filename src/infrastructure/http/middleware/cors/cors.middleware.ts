@@ -1,18 +1,17 @@
-import { BaseMiddleware } from "../base/base.middleware";
-import { singletonProvide } from '../../../ioc'
-import { TYPES } from "../../../../const";
+import cors from 'cors';
 
-import cors from 'cors'
+import { TYPES } from '../../../../const';
+import { singletonProvide, inject } from '../../../ioc';
+import { BaseMiddleware } from '../base';
 
 @singletonProvide(TYPES.MIDDLEWARE)
 export class CorsMiddleware extends BaseMiddleware {
-    constructor() {
-        super()
+  constructor() {
+    super();
+    this.middleware.use(cors());
+  }
 
-        this.middleware.use(cors())
-    }
-
-    get id() {
-        return Symbol.for('CORS_MIDDLEWARE')
-    }
+  get id() {
+    return Symbol.for('CORS_MIDDLEWARE');
+  }
 }

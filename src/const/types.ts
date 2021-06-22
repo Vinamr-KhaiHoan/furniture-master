@@ -8,5 +8,13 @@ export const TYPES = {
     CONFIG: Symbol.for('CONFIG'),
     LOGGER: Symbol.for('LOGGER'),
     HTTP: Symbol.for('HTTP'),
-    API: Symbol.for('API')
+    API: Symbol.for('API'),
+    ARRAY_HELPER: Symbol.for('ARRAY_HELPER'),
+    JWT_HELPER: Symbol.for('JWT_HELPER'),
+    OBJECT_HELPER: Symbol.for('OBJECT_HELPER'),
+    HTTP_HELPER: Symbol.for('HTTP_HELPER'),
+    PARSER: Symbol.for('PARSER'),
+    HTTP_CONTEXT: Symbol.for('HTTP_CONTEXT'),
+    QUERY_PARSER: Symbol.for('QUERY_PARSER'),
+    FACTORY: Symbol.for('FACTORY')
 }

@@ -1,1 +1,1 @@
-export * from './body-parser.middleware'
+export * from './body-parser.middleware';

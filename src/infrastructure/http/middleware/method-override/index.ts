@@ -1,1 +1,1 @@
-export * from './method-override.middleware'
+export * from './method-override.middleware';

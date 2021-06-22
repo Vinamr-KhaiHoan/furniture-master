@@ -1,47 +1,44 @@
-import { LOGGER, TYPES } from '../../../../const';
-import { injectable, inject } from '../../../ioc'
-import { IConfiguration, ILog, ILogger } from '../../../utils';
-import { Http } from '../../http'
-
+import { TYPES, LOGGER } from '../../../../const';
+import { Http } from '../../http';
+import { inject, injectable } from '../../../ioc';
+import { IConfiguration } from '../../../utils/configuration';
+import { ILogger, ILog } from '../../../utils/logger';
 
 @injectable()
 export abstract class BaseMiddleware {
-    protected middleware = Http.SERVER;
+  protected middleware = Http.SERVER;
 
-    @inject(TYPES.LOGGER)
-    private logger: ILogger | undefined;
+  @inject(TYPES.LOGGER)
+  private logger: ILogger | undefined;
 
-    get log(): ILog | undefined {
-        
-        let infraLogger = Symbol.keyFor(LOGGER.INFRASTRUCTURE)
-        let routerType = Symbol.keyFor(TYPES.ROUTER)
-        let id
 
-        if (this.id) {
-            id = Symbol.keyFor(this.id);
-        }
-
-        if (this.logger) {
-            if (infraLogger && routerType && id) {
-                return this.logger.get(
-                    infraLogger.toUpperCase(),
-                    id.toLowerCase()
-                )
-            }
-        }
-
-        return undefined
+  get log(): ILog | undefined {
+    let infraLogger = Symbol.keyFor(LOGGER.INFRASTRUCTURE)
+    let routerType = Symbol.keyFor(TYPES.ROUTER)
+    let id
+    if (this.id) {
+      id = Symbol.keyFor(this.id)
     }
-
-    public load() {
-        let id = Symbol.keyFor(this.id)
-        if(this.log && id) {
-            this.log.info(id.toLowerCase())
-        }
+    if (this.logger){
+      if (infraLogger && routerType && id) {
+        return this.logger.get(
+            infraLogger.toLowerCase(),
+            id.toLowerCase()
+        )
+      }
     }
+    return undefined
+  }
 
-    @inject(TYPES.CONFIG)
-    protected config: IConfiguration | undefined;
+  load() {
+    let id = Symbol.keyFor(this.id)
+    if (this.log && id) {
+      this.log.info(id.toLowerCase());
+    }
+  }
 
-    abstract id: symbol
+  @inject(TYPES.CONFIG)
+  protected config: IConfiguration | undefined;
+
+  abstract id: symbol;
 }

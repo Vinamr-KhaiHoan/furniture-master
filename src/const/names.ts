@@ -9,5 +9,6 @@ export const NAMES = {
     REDIS_WRITE: Symbol.for('REDIS_WRITE'),
     REDIS_LOCALE_READ: Symbol.for('REDIS_LOCALE_READ'),
     REDIS_LOCALE_WRITE: Symbol.for('REDIS_LOCALE_WRITE'),
-    API: Symbol.for('API')
+    API: Symbol.for('API'),
+    QUERY: Symbol.for('QUERY'),
   };
