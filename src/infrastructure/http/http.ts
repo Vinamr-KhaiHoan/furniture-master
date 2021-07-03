@@ -17,12 +17,12 @@ export class Http {
     @multiInject(TYPES.MIDDLEWARE)
     protected middlewares: any[] | undefined;
 
-    @multiInject(TYPES.ROUTER)
-    protected routers: any[] | undefined;
+    // @multiInject(TYPES.ROUTER)
+    // protected routers: any[] | undefined;
 
     load() {
         this.middlewares?.forEach(middleware => middleware.load());
-        this.routers?.forEach(router => router.load());
+        // this.routers?.forEach(router => router.load());
     }
 
     listen(port: number) {

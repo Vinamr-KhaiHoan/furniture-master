@@ -11,4 +11,5 @@ export const NAMES = {
     REDIS_LOCALE_WRITE: Symbol.for('REDIS_LOCALE_WRITE'),
     API: Symbol.for('API'),
     QUERY: Symbol.for('QUERY'),
+    POSTGRES: Symbol.for('POSTGRES')
   };

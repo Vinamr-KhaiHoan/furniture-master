@@ -3,6 +3,7 @@ import { NAMES, TYPES } from "./const";
 import { IHttp } from "./infrastructure/http/http";
 import { inject, namedInject, singletonNamedProvide } from './infrastructure/ioc'
 import { Sequelize } from 'sequelize/types';
+import { PostgresDatabase } from './infrastructure/database';
 
 @singletonNamedProvide(TYPES.APPLICATION, NAMES.API)
 export class ApiApplication extends BaseApplication {
@@ -13,17 +14,12 @@ export class ApiApplication extends BaseApplication {
         return TYPES.API;
     }
 
-    @namedInject(TYPES.SEQUELIZE, NAMES.POSTGRES_INFO_READ)
-    private inforPostgreRead: Sequelize | undefined;
-
-    @namedInject(TYPES.SEQUELIZE, NAMES.POSTGRES_INFO_WRITE)
-    private inforPostgreWrite: Sequelize | undefined;
+    @namedInject(TYPES.DATABASE, NAMES.POSTGRES)
+    protected postgresDatabase: PostgresDatabase
 
     async load() {
-        await this.inforPostgreRead?.authenticate();
-        await this.inforPostgreWrite?.authenticate();
 
-        this.inforPostgreRead?.sync({ force: true })
+        this.postgresDatabase.authenticate()
 
         this.log?.info("DB connected");
     }

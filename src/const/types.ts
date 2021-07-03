@@ -16,5 +16,11 @@ export const TYPES = {
     PARSER: Symbol.for('PARSER'),
     HTTP_CONTEXT: Symbol.for('HTTP_CONTEXT'),
     QUERY_PARSER: Symbol.for('QUERY_PARSER'),
-    FACTORY: Symbol.for('FACTORY')
+    FACTORY: Symbol.for('FACTORY'),
+    VALIDATOR: Symbol.for('VALIDATOR'),
+    ROUTER_VALIDATOR: Symbol.for('ROUTER_VALIDATOR'),
+    SCHEMA: Symbol.for('SCHEMA'),
+    ENTITY_FACTORY: Symbol.for('ENTITY_FACTORY'),
+    DATABASE: Symbol.for('DATABASE'),
+    QUERY_FACTORY: Symbol.for('QUERY_FACTORY')
 }
