@@ -1,17 +1,20 @@
 import { WhereOptions } from "sequelize";
 import { DatabaseModel } from "../..";
+import { TYPES } from "../../../../const";
+import { lazyInject } from "../../../ioc";
 import { Criteria } from "../../../repository";
 import { Context } from "../../../service";
 import { QueryParser } from "../../query-parser";
 
 export class UpdateQuery {
   private model: DatabaseModel;
-  private ctx: Context;
+  
+  @lazyInject(TYPES.HTTP_CONTEXT)
+    private ctx: Context;
 
-  constructor(ctx: Context, model: DatabaseModel) {
-    this.model = model;
-    this.ctx = ctx;
-  }
+    constructor(model: DatabaseModel) {
+        this.model = model;
+    }
 
   public async execute<TEntity = any>(criteria: Criteria, data: TEntity & { updatedAt?: Date; updatedBy?: number }) {
     if (!criteria) {

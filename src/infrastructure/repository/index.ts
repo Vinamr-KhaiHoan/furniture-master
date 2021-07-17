@@ -1,3 +1,5 @@
+export { PaginateResult } from '../database'
+
 export type Criteria = {
     select?: string[];
     filters?: Filter[];
@@ -8,12 +10,6 @@ export type Criteria = {
     transaction?: any;
   };
   
-  export type PaginateResult<TEntity = any> = {
-    docs: TEntity[];
-    total: number;
-    limit: number;
-    offset: number;
-  };
   
   export type Filter = {
     code: string;
@@ -70,3 +66,5 @@ export type Criteria = {
     includes?: Include[];
     filters?: Filter[];
   };
+
+  export * from './user';

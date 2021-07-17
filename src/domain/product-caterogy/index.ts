@@ -9,3 +9,5 @@ export interface IProductCategory {
 }
 
 export interface IProductCategoryDomain extends IDomain, IProductCategory {}
+
+export * from './product-category.domain';

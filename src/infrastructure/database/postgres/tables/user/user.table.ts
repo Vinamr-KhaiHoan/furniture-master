@@ -1,14 +1,14 @@
 
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance, ModelOptions } from '../../..';
 import { DATABASE, TABLE, TYPES } from '../../../../../const';
-import { IUserDomain } from '../../../../../domain';
+import { IUserDomain, UserDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface IUserInstance extends ModelInstance<IUserDomain> {}
+export interface IUserInstance extends ModelInstance<UserDomain> {}
 
-@singletonNamedProvide(TYPES.TABLE, DATABASE.PRODUCT)
-export class UserModel extends BasePostgresTable<IUserDomain, IUserInstance> {
+@singletonNamedProvide(TYPES.DATABASE, DATABASE.USER)
+export class UserModel extends BasePostgresTable<UserDomain, IUserInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IUserInstance> = {
             id: {
@@ -32,6 +32,11 @@ export class UserModel extends BasePostgresTable<IUserDomain, IUserInstance> {
                 allowNull: false,
                 field: 'user_email'
             },
+            password: {
+                type: DatabaseDataTypes.STRING,
+                allowNull: false,
+                field: 'user_password'
+            },
             isSuperAdmin: {
                 type: DatabaseDataTypes.BOOLEAN,
                 allowNull: false,
@@ -49,7 +54,7 @@ export class UserModel extends BasePostgresTable<IUserDomain, IUserInstance> {
                 field: 'created_at'
             },
             createdBy: {
-                type: DatabaseDataTypes.NUMBER,
+                type: DatabaseDataTypes.INTEGER,
                 allowNull: true,
                 field: 'created_by'
             },
@@ -59,7 +64,7 @@ export class UserModel extends BasePostgresTable<IUserDomain, IUserInstance> {
                 field: 'updated_at'
             },
             updatedBy: {
-                type: DatabaseDataTypes.NUMBER,
+                type: DatabaseDataTypes.INTEGER,
                 allowNull: true,
                 field: 'updated_by'
             }

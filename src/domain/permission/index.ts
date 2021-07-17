@@ -1,7 +1,6 @@
 import { IDomain } from "../../infrastructure/base/domain";
 
 export interface IPermission {
-    id: number;
     name: string;
     role: number[];
     accountTypes: number[];

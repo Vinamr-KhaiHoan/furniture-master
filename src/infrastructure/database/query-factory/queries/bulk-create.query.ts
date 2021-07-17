@@ -3,17 +3,20 @@ import { DatabaseModel } from "../..";
 import { TYPES } from "../../../../const";
 import { IArrayHelper } from "../../../index";
 import { container } from '../../../../index';
+import { lazyInject } from "../../../ioc";
+import { Context } from "../../../service";
 
 export class BulkCreateQuery {
     private model: DatabaseModel;
-    private ctx: any;
     private arrayHelper: IArrayHelper;
-  
-    constructor(ctx: any, model: DatabaseModel) {
-      this.ctx = ctx;
+
+    @lazyInject(TYPES.HTTP_CONTEXT)
+    private ctx: Context;
+
+    constructor(model: DatabaseModel) {
       this.model = model;
   
-      this.arrayHelper = container.get(TYPES.ARRAY_HELPER);
+      this.arrayHelper = container.get<IArrayHelper>(TYPES.ARRAY_HELPER);
     }
   
     public async execute<TEntity = any>(data: (TEntity & { createdBy?: number })[]): Promise<Model<TEntity>[]> {
@@ -31,7 +34,7 @@ export class BulkCreateQuery {
       });
   
       return this.model.bulkCreate(data, {
-          transaction: this.ctx.tracsaction
+          transaction: this.ctx.transaction
       })
     }
   }

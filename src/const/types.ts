@@ -13,6 +13,7 @@ export const TYPES = {
     JWT_HELPER: Symbol.for('JWT_HELPER'),
     OBJECT_HELPER: Symbol.for('OBJECT_HELPER'),
     HTTP_HELPER: Symbol.for('HTTP_HELPER'),
+    PASSWORD_HELPER: Symbol.for('PASSWORD_HELPER'),
     PARSER: Symbol.for('PARSER'),
     HTTP_CONTEXT: Symbol.for('HTTP_CONTEXT'),
     QUERY_PARSER: Symbol.for('QUERY_PARSER'),
@@ -22,5 +23,11 @@ export const TYPES = {
     SCHEMA: Symbol.for('SCHEMA'),
     ENTITY_FACTORY: Symbol.for('ENTITY_FACTORY'),
     DATABASE: Symbol.for('DATABASE'),
-    QUERY_FACTORY: Symbol.for('QUERY_FACTORY')
+    QUERY_FACTORY: Symbol.for('QUERY_FACTORY'),
+    ERROR_FACTORY: Symbol.for('ERROR_FACTORY'),
+    MAPPER: Symbol.for('MAPPER'),
+    INTERCEPTOR: Symbol.for('INTERCEPTOR'),
+    REPOSITORY: Symbol.for('REPOSITORY'),
+    CONTEXT_SERVICE: Symbol.for('CONTEXT_SERVICE'),
+    WORKFLOW: Symbol.for('WORKFLOW')
 }

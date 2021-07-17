@@ -2,14 +2,18 @@ import { WhereOptions } from "sequelize";
 import { DatabaseModel } from "../../index";
 import { Criteria } from "../../../repository";
 import { QueryParser } from "../../query-parser";
+import { lazyInject } from "../../../ioc";
+import { TYPES } from "../../../../const";
+import { Context } from "../../../service";
 
 export class BulkDeleteQuery {
     private model: DatabaseModel;
-    private ctx: any;
+    
+    @lazyInject(TYPES.HTTP_CONTEXT)
+    private ctx: Context;
   
-    constructor(ctx: any, model: DatabaseModel) {
+    constructor(model: DatabaseModel) {
       this.model = model;
-      this.ctx = ctx;
     }
   
     public async execute(criteria: Criteria): Promise<number> {

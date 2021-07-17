@@ -1,15 +1,18 @@
 import { DatabaseModel } from "../..";
+import { TYPES } from "../../../../const";
+import { lazyInject } from "../../../ioc";
 import { Criteria } from "../../../repository";
 import { Context } from "../../../service";
 import { QueryParser } from "../../query-parser";
 
 export class DeleteByIdQuery {
   private model: DatabaseModel;
+  
+  @lazyInject(TYPES.HTTP_CONTEXT)
   private ctx: Context;
 
-  constructor(ctx: Context, model: DatabaseModel) {
+  constructor(model: DatabaseModel) {
     this.model = model;
-    this.ctx = ctx;
   }
 
   public async execute(id: number): Promise<void> {

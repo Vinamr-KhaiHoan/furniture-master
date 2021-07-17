@@ -1,0 +1,6 @@
+export const USER_WORKFLOW = {
+    CREATE: Symbol.for('CREATE_USER_WORKFLOW'),
+    UPDATE: Symbol.for('UPDATE_USER_WORKFLOW'),
+    FIND_BY_ID: Symbol.for('FIND_USER_BY_ID_WORKFLOW'),
+    PAGINATE: Symbol.for('PAGINATE_USER_WORKFLOW')
+}

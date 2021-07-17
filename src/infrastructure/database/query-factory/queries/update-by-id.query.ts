@@ -1,5 +1,7 @@
 import { Model } from "sequelize/types";
 import { DatabaseModel } from "../..";
+import { TYPES } from "../../../../const";
+import { lazyInject } from "../../../ioc";
 import { Criteria } from "../../../repository";
 import { Context } from "../../../service";
 import { QueryParser } from "../../query-parser";
@@ -7,12 +9,13 @@ import { QueryParser } from "../../query-parser";
 
 export class UpdateByIdQuery {
   private model: DatabaseModel;
-  private ctx: Context;
+  
+  @lazyInject(TYPES.HTTP_CONTEXT)
+    private ctx: Context;
 
-  constructor(ctx: Context, model: DatabaseModel) {
-    this.model = model;
-    this.ctx = ctx;
-  }
+    constructor(model: DatabaseModel) {
+        this.model = model;
+    }
 
   public async execute<TEntity = any>(
     id: number,

@@ -4,11 +4,13 @@ import { IConfiguration, ILog, ILogger } from "../../utils";
 import { Sequelize } from "sequelize";
 import { DatabaseModels } from '../index';
 import { IBasePostgresTable } from './tables/base';
-import { IAttributeDomain, ICategoryDomain, IProductAttributeDomain, IProductCategoryDomain, IProductDomain, IUserDomain } from '../../../domain';
-import { IAttributeInstance, ICategoryInstance, IProductAttributeInstance, IProductCategoryInsance, IProductInstance, IUserInstance } from './tables';
-
+import { AttributeDomain, CaterogyDomain, ProductAttributeDomain, ProductDomain, UserDomain, ProductCategoryDomain, PermissionDomain, MetadataDomain, OrderDomain, OrderItemDomain, ProductImageDomain, SourceDomain, ImageDomain } from '../../../domain';
+import { IAttributeInstance, ICategoryInstance, ICustomerInstance, IImageInstance, IMetadataInstance, IOrderInstance, IOrderItemInstance, IPermissionInstance, IProductAttributeInstance, IProductCategoryInsance, IProductImageInstance, IProductInstance, ISourceInstance, IUserInstance } from './tables';
+import { CustomerDomain } from '../../../domain/customer/customer.domain';
+import { operatorsAliases } from './operator-aliases'
 
 export interface IDatabase {
+    dbModels: DatabaseModels;
     authenticate(): Promise<void>;
 }
 
@@ -31,32 +33,58 @@ export class PostgresDatabase {
 
 
         @namedInject(TYPES.DATABASE, DATABASE.USER)
-        protected userModel: IBasePostgresTable<IUserDomain, IUserInstance>,
+        protected userModel: IBasePostgresTable<UserDomain, IUserInstance>,
 
         @namedInject(TYPES.DATABASE, DATABASE.PRODUCT)
-        protected productModel: IBasePostgresTable<IProductDomain, IProductInstance>,
+        protected productModel: IBasePostgresTable<ProductDomain, IProductInstance>,
 
         @namedInject(TYPES.DATABASE, DATABASE.CATEGORY)
-        protected categoryModel: IBasePostgresTable<ICategoryDomain, ICategoryInstance>,
+        protected categoryModel: IBasePostgresTable<CaterogyDomain, ICategoryInstance>,
 
-        @namedInject(TYPES.DATABASE, DATABASE.USER)
-        protected attributeModel: IBasePostgresTable<IAttributeDomain, IAttributeInstance>,
+        @namedInject(TYPES.DATABASE, DATABASE.ATTRIBUTE)
+        protected attributeModel: IBasePostgresTable<AttributeDomain, IAttributeInstance>,
 
         @namedInject(TYPES.DATABASE, DATABASE.PRODUCT_CATEGORY)
-        protected productCaterogyModel: IBasePostgresTable<IProductCategoryDomain, IProductCategoryInsance>,
+        protected productCaterogyModel: IBasePostgresTable<ProductCategoryDomain, IProductCategoryInsance>,
 
-        @namedInject(TYPES.DATABASE, DATABASE.USER)
-        protected productAttributeModel: IBasePostgresTable<IProductAttributeDomain, IProductAttributeInstance>
+        @namedInject(TYPES.DATABASE, DATABASE.PRODUCT_ATTRIBUTE)
+        protected productAttributeModel: IBasePostgresTable<ProductAttributeDomain, IProductAttributeInstance>,
+
+        @namedInject(TYPES.DATABASE, DATABASE.PERMISSION)
+        protected permissionModel: IBasePostgresTable<PermissionDomain, IPermissionInstance>,
+
+        @namedInject(TYPES.DATABASE, DATABASE.CUSTOMER)
+        protected customerModel: IBasePostgresTable<CustomerDomain, ICustomerInstance>,
+
+        @namedInject(TYPES.DATABASE, DATABASE.METADATA)
+        protected metadataModel: IBasePostgresTable<MetadataDomain, IMetadataInstance>,
+
+        @namedInject(TYPES.DATABASE, DATABASE.ORDER)
+        protected orderModel: IBasePostgresTable<OrderDomain, IOrderInstance>,
+
+        @namedInject(TYPES.DATABASE, DATABASE.ORDER_ITEM)
+        protected orderItemModel: IBasePostgresTable<OrderItemDomain, IOrderItemInstance>,
+
+        @namedInject(TYPES.DATABASE, DATABASE.PRODUCT_IMAGE)
+        protected productImageModel: IBasePostgresTable<ProductImageDomain, IProductImageInstance>,
+
+        @namedInject(TYPES.DATABASE, DATABASE.SOURCE)
+        protected sourceModel: IBasePostgresTable<SourceDomain, ISourceInstance>,
+
+        @namedInject(TYPES.DATABASE, DATABASE.IMAGE)
+        protected imageModel: IBasePostgresTable<ImageDomain, IImageInstance>
     ) {
-        const dbConfig = this.config.get('postgres.info.write')
-        this.log.info(dbConfig)
+        const dbConfig = {
+            ...this.config.get('postgres.info.write'),
+            operatorsAliases
+        }
+
         try {
 
             this.conn = new Sequelize(dbConfig)
             this.initialModels()
 
         } catch (err) {
-            this.log.error(err.message)
             process.exit()
         }
     }
@@ -69,7 +97,12 @@ export class PostgresDatabase {
     }
 
     public authenticate() {
-        return this.conn.authenticate()
+        this.conn.authenticate()
+        this.sync()
+    }
+
+    public sync() {
+        return this.conn.sync({ force: true })
     }
 
     private initialModels() {
@@ -79,7 +112,17 @@ export class PostgresDatabase {
             category: this.categoryModel.define(this.conn),
             attribute: this.attributeModel.define(this.conn),
             productAttribute: this.productAttributeModel.define(this.conn),
-            productCategory: this.productCaterogyModel.define(this.conn)
+            productCategory: this.productCaterogyModel.define(this.conn),
+            permission: this.permissionModel.define(this.conn),
+            customer: this.customerModel.define(this.conn),
+            metadata: this.metadataModel.define(this.conn),
+            order: this.orderModel.define(this.conn),
+            orderItem: this.orderItemModel.define(this.conn),
+            productImage: this.productImageModel.define(this.conn),
+            source: this.sourceModel.define(this.conn),
+            image: this.imageModel.define(this.conn)
         }
+
+        this.dbModels = dbModels
     }
 }

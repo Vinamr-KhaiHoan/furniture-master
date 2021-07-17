@@ -3,14 +3,17 @@ import { Criteria } from "../../../repository";
 import { QueryParser } from "../../query-parser";
 import { Context } from "../../../service";
 import { Model } from "sequelize";
+import { lazyInject } from "../../../ioc";
+import { TYPES } from "../../../../const";
 
 
 export class FindByIdQuery {
   private model: DatabaseModel;
+  
+  @lazyInject(TYPES.HTTP_CONTEXT)
   private ctx: Context;
 
-  constructor(ctx: Context, model: DatabaseModel) {
-    this.ctx = ctx;
+  constructor(model: DatabaseModel) {
     this.model = model;
   }
 

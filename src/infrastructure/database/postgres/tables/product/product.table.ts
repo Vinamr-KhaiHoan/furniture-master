@@ -1,13 +1,13 @@
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance, ModelOptions } from '../../..';
 import { DATABASE, TABLE, TYPES } from '../../../../../const';
-import { IProductDomain } from '../../../../../domain';
+import { IProductDomain, ProductDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface IProductInstance extends ModelInstance<IProductDomain> {}
+export interface IProductInstance extends ModelInstance<ProductDomain> {}
 
-@singletonNamedProvide(TYPES.TABLE, DATABASE.PRODUCT)
-export class ProductModel extends BasePostgresTable<IProductDomain, IProductInstance> {
+@singletonNamedProvide(TYPES.DATABASE, DATABASE.PRODUCT)
+export class ProductModel extends BasePostgresTable<ProductDomain, IProductInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IProductInstance> = {
             id: {
@@ -42,7 +42,7 @@ export class ProductModel extends BasePostgresTable<IProductDomain, IProductInst
                 field: 'created_at'
             },
             createdBy: {
-                type: DatabaseDataTypes.NUMBER,
+                type: DatabaseDataTypes.INTEGER,
                 allowNull: true,
                 field: 'created_by'
             },
@@ -52,7 +52,7 @@ export class ProductModel extends BasePostgresTable<IProductDomain, IProductInst
                 field: 'updated_at'
             },
             updatedBy: {
-                type: DatabaseDataTypes.NUMBER,
+                type: DatabaseDataTypes.INTEGER,
                 allowNull: true,
                 field: 'updated_by'
             }

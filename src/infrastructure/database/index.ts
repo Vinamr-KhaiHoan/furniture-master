@@ -90,7 +90,14 @@ export type DatabaseModels = {
     category?: DatabaseModel,
     attribute?:DatabaseModel,
     productAttribute?: DatabaseModel,
-    productCategory?: DatabaseModel
+    productCategory?: DatabaseModel,
+    customer?: DatabaseModel,
+    metadata?: DatabaseModel,
+    order?:DatabaseModel,
+    orderItem?: DatabaseModel,
+    productImage?: DatabaseModel,
+    source?: DatabaseModel,
+    image?: DatabaseModel
 };
 
 export * from './query-builder';

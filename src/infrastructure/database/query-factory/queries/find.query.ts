@@ -1,5 +1,7 @@
 import { Model } from "sequelize";
 import { DatabaseModel } from "../..";
+import { TYPES } from "../../../../const";
+import { lazyInject } from "../../../ioc";
 import { Criteria } from "../../../repository";
 import { Context } from "../../../service";
 import { QueryParser } from "../../query-parser";
@@ -7,10 +9,11 @@ import { QueryParser } from "../../query-parser";
 
 export class FindQuery {
     private model: DatabaseModel;
+    
+    @lazyInject(TYPES.HTTP_CONTEXT)
     private ctx: Context;
 
-    constructor(ctx: Context, model: DatabaseModel) {
-        this.ctx = ctx;
+    constructor(model: DatabaseModel) {
         this.model = model;
     }
 

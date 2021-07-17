@@ -1,14 +1,14 @@
 import { ModelOptions } from 'sequelize/types';
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance } from '../../..';
-import { DATABASE, TYPES } from '../../../../../const';
-import { IProductAttributeDomain } from '../../../../../domain';
+import { DATABASE, TABLE, TYPES } from '../../../../../const';
+import { IProductAttributeDomain, ProductAttributeDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface IProductAttributeInstance extends ModelInstance<IProductAttributeDomain> {}
+export interface IProductAttributeInstance extends ModelInstance<ProductAttributeDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.PRODUCT_ATTRIBUTE)
-export class ProductAttributeModel extends BasePostgresTable<IProductAttributeDomain, IProductAttributeInstance> {
+export class ProductAttributeModel extends BasePostgresTable<ProductAttributeDomain, IProductAttributeInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IProductAttributeInstance> = {
             id: {
@@ -53,7 +53,7 @@ export class ProductAttributeModel extends BasePostgresTable<IProductAttributeDo
 
     get options() {
         const options: ModelOptions = {
-            tableName: 'product_attribute'
+            tableName: TABLE.PRODUCT_ATTRIBUTES
         }
 
         return options

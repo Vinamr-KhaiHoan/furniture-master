@@ -1,18 +1,18 @@
 import { ModelOptions } from 'sequelize/types';
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance } from '../../..';
 import { DATABASE, TABLE, TYPES } from '../../../../../const';
-import { ICategoryDomain } from '../../../../../domain';
+import { CaterogyDomain, ICategoryDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface ICategoryInstance extends ModelInstance<ICategoryDomain> {}
+export interface ICategoryInstance extends ModelInstance<CaterogyDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.CATEGORY)
-export class CategoryModel extends BasePostgresTable<ICategoryDomain, ICategoryInstance> {
+export class CategoryModel extends BasePostgresTable<CaterogyDomain, ICategoryInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<ICategoryInstance> = {
             id: {
-                type: DatabaseDataTypes.STRING,
+                type: DatabaseDataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
                 field: 'category_id'
@@ -43,7 +43,7 @@ export class CategoryModel extends BasePostgresTable<ICategoryDomain, ICategoryI
                 field: 'created_at'
             },
             createdBy: {
-                type: DatabaseDataTypes.NUMBER,
+                type: DatabaseDataTypes.INTEGER,
                 allowNull: true,
                 field: 'created_by'
             },
@@ -53,7 +53,7 @@ export class CategoryModel extends BasePostgresTable<ICategoryDomain, ICategoryI
                 field: 'updated_at'
             },
             updatedBy: {
-                type: DatabaseDataTypes.NUMBER,
+                type: DatabaseDataTypes.INTEGER,
                 allowNull: true,
                 field: 'updated_by'
             }

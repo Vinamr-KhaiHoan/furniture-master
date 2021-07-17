@@ -1,14 +1,15 @@
 import { ModelOptions } from 'sequelize/types';
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance } from '../../..';
-import { DATABASE, TYPES } from '../../../../../const';
+import { DATABASE, TABLE, TYPES } from '../../../../../const';
 import { IProductCategoryDomain } from '../../../../../domain';
+import { ProductCategoryDomain } from '../../../../../domain/product-caterogy/product-category.domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface IProductCategoryInsance extends ModelInstance<IProductCategoryDomain> {}
+export interface IProductCategoryInsance extends ModelInstance<ProductCategoryDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.PRODUCT_CATEGORY)
-export class ProductCategoryModel extends BasePostgresTable<IProductCategoryDomain, IProductCategoryInsance> {
+export class ProductCategoryModel extends BasePostgresTable<ProductCategoryDomain, IProductCategoryInsance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IProductCategoryInsance> = {
             id: {
@@ -43,12 +44,12 @@ export class ProductCategoryModel extends BasePostgresTable<IProductCategoryDoma
     }
 
     get tableName() {
-        return 'productAttribute'
+        return 'productCategory'
     }
 
     get options() {
         const options: ModelOptions = {
-            tableName: 'product_attribute'
+            tableName: TABLE.PRODUCT_CATEGORY
         }
 
         return options

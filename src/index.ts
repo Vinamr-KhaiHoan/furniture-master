@@ -10,6 +10,9 @@ import {
 import './const';
 import './infrastructure';
 import './application';
+import './controller';
+import './workflow';
+import './domain';
 
 container.load(buildProviderModule())
 

@@ -1,48 +1,59 @@
 import { IQueryFactory } from ".";
+import { DatabaseModel } from "..";
 import { TYPES } from "../../../const";
 import { singletonProvide } from "../../ioc";
-import { FindQuery, FindByIdQuery, UpdateQuery, UpdateByIdQuery, DeleteByIdQuery, BulkCreateQuery, BulkDeleteQuery, PaginateQuery } from "./queries";
+import { FindQuery, FindByIdQuery, UpdateQuery, UpdateByIdQuery, DeleteByIdQuery, BulkCreateQuery, BulkDeleteQuery, PaginateQuery, BulkUpdateQuery, CountQuery, IsExistQuery } from "./queries";
 import { CreateQuery } from "./queries/create.query";
 
 
 //Factory to create Query with context
 @singletonProvide(TYPES.QUERY_FACTORY)
 export default class QueryFactory implements IQueryFactory{
-    public createFindQuery(ctx: any, model: any) {
-        return new FindQuery(ctx, model)
-    }
-    public createFindByIdQuery(ctx: any, model: any): FindByIdQuery {
-        return new FindByIdQuery(ctx, model)
-    }
-    createPaginateQuery(ctx: any, model: any) {
-        return new PaginateQuery(ctx, model)
-    }
-    public createCreateQuery(ctx: any, model: any) : CreateQuery {
-        return new CreateQuery(ctx, model);
+    public createFindQuery(model: DatabaseModel) {
+        return new FindQuery(model)
     }
 
-    public createUpdateQuery(ctx: any, model: any) : UpdateQuery {
-        return new UpdateQuery(ctx, model)
+    public createFindByIdQuery(model: DatabaseModel): FindByIdQuery {
+        return new FindByIdQuery(model)
     }
 
-    createUpdateByIdQuery(ctx: any, model: any) {
-        return new UpdateByIdQuery(ctx, model)
-    }
-    createDeleteByIdQuery(ctx: any, model: any) {
-        return new DeleteByIdQuery(ctx, model)
-    }
-    createBulkCreateQuery(ctx: any, model: any) {
-        return new BulkCreateQuery(ctx, model)
+    public createPaginateQuery(model: DatabaseModel) {
+        return new PaginateQuery(model)
     }
 
-    createBulkDeleteQuery(ctx: any, model: any) {
-        return new BulkDeleteQuery(ctx, model)
+    public createCreateQuery(model: DatabaseModel) : CreateQuery {
+        return new CreateQuery(model);
     }
-    createBulkUpdateQuery(ctx: any, model: any) {
-        throw new Error("Method not implemented.");
+
+    public createUpdateQuery(model: DatabaseModel) : UpdateQuery {
+        return new UpdateQuery(model)
     }
-    createCountQuery(ctx: any, model: any) {
-        throw new Error("Method not implemented.");
+
+    public createUpdateByIdQuery(model: DatabaseModel) {
+        return new UpdateByIdQuery(model)
+    }
+
+    public createDeleteByIdQuery(model: DatabaseModel) {
+        return new DeleteByIdQuery(model)
+    }
+
+    public createBulkCreateQuery(model: DatabaseModel) {
+        return new BulkCreateQuery(model)
+    }
+
+    public createBulkDeleteQuery(model: DatabaseModel) {
+        return new BulkDeleteQuery(model)
+    }
+
+    public createBulkUpdateQuery(model: DatabaseModel) {
+        return new BulkUpdateQuery(model)
+    }
+
+    public createCountQuery(model: DatabaseModel) {
+        return new CountQuery(model)
     }
     
+    public createIsExistedQuery(model: DatabaseModel) {
+        return new IsExistQuery(model)
+    }
 }

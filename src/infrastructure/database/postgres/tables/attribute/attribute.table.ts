@@ -1,14 +1,13 @@
-import { ModelOptions } from 'sequelize/types';
-import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance } from '../../..';
+import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance, ModelOptions } from '../../..';
 import { DATABASE, TABLE, TYPES } from '../../../../../const';
-import { IAttributeDomain } from '../../../../../domain';
+import { AttributeDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface IAttributeInstance extends ModelInstance<IAttributeDomain> {}
+export interface IAttributeInstance extends ModelInstance<AttributeDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.ATTRIBUTE)
-export class AttributeModel extends BasePostgresTable<IAttributeDomain, IAttributeInstance> {
+export class AttributeModel extends BasePostgresTable<AttributeDomain, IAttributeInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IAttributeInstance> = {
             id: {
@@ -33,7 +32,7 @@ export class AttributeModel extends BasePostgresTable<IAttributeDomain, IAttribu
                 field: 'created_at'
             },
             createdBy: {
-                type: DatabaseDataTypes.NUMBER,
+                type: DatabaseDataTypes.INTEGER,
                 allowNull: true,
                 field: 'created_by'
             },
@@ -43,7 +42,7 @@ export class AttributeModel extends BasePostgresTable<IAttributeDomain, IAttribu
                 field: 'updated_at'
             },
             updatedBy: {
-                type: DatabaseDataTypes.NUMBER,
+                type: DatabaseDataTypes.INTEGER,
                 allowNull: true,
                 field: 'updated_by'
             }
