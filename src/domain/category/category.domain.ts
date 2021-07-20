@@ -4,7 +4,7 @@ import { BaseDomain } from '../../infrastructure/base/domain';
 import { constructorProvide } from '../../infrastructure/ioc';
 
 @constructorProvide(API_DOMAIN.CATEGORY)
-export class CaterogyDomain extends BaseDomain<ICategoryDomain> implements ICategoryDomain{
+export class CategoryDomain extends BaseDomain<ICategoryDomain> implements ICategoryDomain{
     get id() {
         return this.context.id;
     }

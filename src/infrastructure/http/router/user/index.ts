@@ -1,2 +1,2 @@
-export * from './user-router.schema';
-export * from './user.router'
+export * from './user.schema';
+export * from './user.router';

@@ -4,7 +4,7 @@ import { IConfiguration, ILog, ILogger } from "../../utils";
 import { Sequelize } from "sequelize";
 import { DatabaseModels } from '../index';
 import { IBasePostgresTable } from './tables/base';
-import { AttributeDomain, CaterogyDomain, ProductAttributeDomain, ProductDomain, UserDomain, ProductCategoryDomain, PermissionDomain, MetadataDomain, OrderDomain, OrderItemDomain, ProductImageDomain, SourceDomain, ImageDomain } from '../../../domain';
+import { AttributeDomain, CategoryDomain, ProductAttributeDomain, ProductDomain, UserDomain, ProductCategoryDomain, PermissionDomain, MetadataDomain, OrderDomain, OrderItemDomain, ProductImageDomain, SourceDomain, ImageDomain } from '../../../domain';
 import { IAttributeInstance, ICategoryInstance, ICustomerInstance, IImageInstance, IMetadataInstance, IOrderInstance, IOrderItemInstance, IPermissionInstance, IProductAttributeInstance, IProductCategoryInsance, IProductImageInstance, IProductInstance, ISourceInstance, IUserInstance } from './tables';
 import { CustomerDomain } from '../../../domain/customer/customer.domain';
 import { operatorsAliases } from './operator-aliases'
@@ -39,7 +39,7 @@ export class PostgresDatabase {
         protected productModel: IBasePostgresTable<ProductDomain, IProductInstance>,
 
         @namedInject(TYPES.DATABASE, DATABASE.CATEGORY)
-        protected categoryModel: IBasePostgresTable<CaterogyDomain, ICategoryInstance>,
+        protected categoryModel: IBasePostgresTable<CategoryDomain, ICategoryInstance>,
 
         @namedInject(TYPES.DATABASE, DATABASE.ATTRIBUTE)
         protected attributeModel: IBasePostgresTable<AttributeDomain, IAttributeInstance>,

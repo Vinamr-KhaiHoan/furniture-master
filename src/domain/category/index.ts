@@ -1,10 +1,10 @@
 import { IDomain } from "../../infrastructure/base/domain";
 
 export interface ICategory {
-    image: string;
+    image?: string;
     name: string;
     status: string;
-    description: string;
+    description?: string;
     createdBy: number;
     createdAt: Date;
     updatedBy: number;

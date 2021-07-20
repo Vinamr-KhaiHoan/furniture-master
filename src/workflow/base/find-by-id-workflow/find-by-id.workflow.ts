@@ -28,6 +28,10 @@ export abstract class FindByIdWorkflow<D extends IDomain, I extends IBaseHttpInp
     public async execute(input: I): Promise<O> {
         const doc = await this.repository.findById(input.id)
 
+        if(!doc) {
+            throw this.errorFactory.unauthorizedError(`This id isn't existed.`)
+        }
+
         const output = <O>{
             data: {
                 message: `Find successfully`,

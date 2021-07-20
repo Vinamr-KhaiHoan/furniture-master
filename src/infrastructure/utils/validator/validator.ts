@@ -29,6 +29,7 @@ export class Validator {
 
   validate(schemaId: string, data: any) {
     const validator = Validator.AJV.getSchema(schemaId);
+
     let valid
 
     if (validator) {

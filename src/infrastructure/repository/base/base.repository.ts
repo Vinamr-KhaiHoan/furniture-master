@@ -62,7 +62,7 @@ export abstract class BasePostgresRepository<D extends IDomain> implements IRepo
 
             const doc = await findByIdQuery.execute(id, criteria)
 
-            return this.mapper.toEntity(doc)
+            return doc ? this.mapper.toEntity(doc) : undefined
         }
         catch (error) {
             if (error.name === 'SequelizeUniqueConstraintError') {

@@ -2,7 +2,7 @@ import { IDomain } from "../../infrastructure/base/domain";
 
 export interface IAttribute {
     name: string;
-    status: string;
+    status: number;
     createdBy: number;
     createdAt: Date;
     updatedBy: number;

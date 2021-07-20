@@ -1,14 +1,14 @@
 import { ModelOptions } from 'sequelize/types';
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance } from '../../..';
 import { DATABASE, TABLE, TYPES } from '../../../../../const';
-import { CaterogyDomain, ICategoryDomain } from '../../../../../domain';
+import { CategoryDomain, ICategoryDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface ICategoryInstance extends ModelInstance<CaterogyDomain> {}
+export interface ICategoryInstance extends ModelInstance<CategoryDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.CATEGORY)
-export class CategoryModel extends BasePostgresTable<CaterogyDomain, ICategoryInstance> {
+export class CategoryModel extends BasePostgresTable<CategoryDomain, ICategoryInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<ICategoryInstance> = {
             id: {

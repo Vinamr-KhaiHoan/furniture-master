@@ -1,4 +1,4 @@
-import { API_DOMAIN, DATABASE, NAMES, TYPES } from '../../../const';
+import { API_DOMAIN, NAMES, TYPES } from '../../../const';
 import { UserDomain } from '../../../domain';
 import { DatabaseModel, IDatabase } from '../../database';
 import { namedInject, singletonNamedProvide } from '../../ioc';
@@ -32,6 +32,6 @@ export class UserRepository extends BasePostgresRepository<UserDomain> implement
             limit: 1
         })
 
-        return doc[0]
+        return doc.length > 0 ? this.mapper.toEntity(doc[0]) : undefined; 
     }
 }

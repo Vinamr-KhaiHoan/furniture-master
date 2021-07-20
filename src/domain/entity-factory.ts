@@ -3,7 +3,7 @@ import { IDomain } from '../infrastructure/base/domain';
 import { singletonProvide } from '../infrastructure/ioc';
 import { AddressDomain } from './address';
 import { AttributeDomain } from './attribute';
-import { CaterogyDomain } from './category';
+import { CategoryDomain } from './category';
 import { ChannelDomain } from './channel';
 import { CustomerDomain } from './customer/customer.domain';
 import { ImageDomain } from './image';
@@ -33,7 +33,7 @@ export class EntityFactory {
             return new ProductDomain(data);
 
             case API_DOMAIN.CATEGORY.toString(): 
-            return new CaterogyDomain(data);
+            return new CategoryDomain(data);
 
             case API_DOMAIN.ATTRIBUTE.toString(): 
             return new AttributeDomain(data);

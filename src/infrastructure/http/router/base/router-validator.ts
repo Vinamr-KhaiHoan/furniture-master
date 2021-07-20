@@ -31,7 +31,11 @@ export class RouterValidator {
     return (req: Request, res: Response, next: NextFunction) => {
       const shemaId = [req.method, req.route.path].join('::');
 
+      this.log.info(shemaId)
+
       const data = { ...req.params, ...req.body, ...req.query };
+
+      console.log(data)
 
       if (this.validator){
         const { valid, errors } = this.validator.validate(shemaId, data);

@@ -28,7 +28,6 @@ export class CreateQuery{
             transaction : this.ctx.transaction
         }
 
-        console.log(this.ctx.transaction)
         if(options && options.include)
             opts.include = options.include;
            

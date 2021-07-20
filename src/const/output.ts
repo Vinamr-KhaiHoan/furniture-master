@@ -4,3 +4,21 @@ export const USER_OUTPUT = {
     FIND_BY_ID: Symbol.for('FIND_USER_BY_ID_OUTPUT'),
     PAGINATE: Symbol.for('PAGINATE_USER_OUTPUT')
 }
+
+export const AUTH_OUTPUT = {
+    SIGN_IN: Symbol.for('SIGN_IN_OUTPUT')
+}
+
+export const CATEGORY_OUTPUT = {
+    CREATE: Symbol.for('CREATE_CATEGORY_OUTPUT'),
+    UPDATE: Symbol.for('UPDATE_CATEGORY_OUTPUT'),
+    FIND_BY_ID: Symbol.for('FIND_CATEGORY_BY_ID_OUTPUT'),
+    PAGINATE: Symbol.for('PAGINATE_CATEGORY_OUTPUT')
+}
+
+export const ATTRIBUTE_OUTPUT = {
+    CREATE: Symbol.for('CREATE_ATTRIBUTE_OUTPUT'),
+    UPDATE: Symbol.for('UPDATE_ATTRIBUTE_OUTPUT'),
+    FIND_BY_ID: Symbol.for('FIND_ATTRIBUTE_BY_ID_OUTPUT'),
+    PAGINATE: Symbol.for('PAGINATE_ATTRIBUTE_OUTPUT')
+}
