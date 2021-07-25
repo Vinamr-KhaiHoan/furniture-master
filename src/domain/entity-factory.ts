@@ -27,52 +27,52 @@ export class EntityFactory {
     create(type: string, data:any) {
         switch(type) {
             case API_DOMAIN.USER.toString(): 
-            return new UserDomain(data);
+            return new UserDomain(data).json();
 
             case API_DOMAIN.PRODUCT.toString(): 
-            return new ProductDomain(data);
+            return new ProductDomain(data).json();
 
             case API_DOMAIN.CATEGORY.toString(): 
-            return new CategoryDomain(data);
+            return new CategoryDomain(data).json();
 
             case API_DOMAIN.ATTRIBUTE.toString(): 
-            return new AttributeDomain(data);
+            return new AttributeDomain(data).json();
 
             case API_DOMAIN.PRODUCT_CATEGORY.toString(): 
-            return new ProductCategoryDomain(data);
+            return new ProductCategoryDomain(data).json();
 
             case API_DOMAIN.PRODUCT_ATTRIBUTE.toString(): 
-            return new ProductAttributeDomain(data);
+            return new ProductAttributeDomain(data).json();
 
             case API_DOMAIN.ADDRESS.toString(): 
-            return new AddressDomain(data);
+            return new AddressDomain(data).json();
             
             case API_DOMAIN.CHANNEL.toString(): 
-            return new ChannelDomain(data);
+            return new ChannelDomain(data).json();
             
             case API_DOMAIN.CUSTOMER.toString(): 
-            return new CustomerDomain(data);
+            return new CustomerDomain(data).json();
 
             case API_DOMAIN.IMAGE.toString(): 
-            return new ImageDomain(data);
+            return new ImageDomain(data).json();
 
             case API_DOMAIN.METADATA.toString(): 
-            return new MetadataDomain(data);
+            return new MetadataDomain(data).json();
 
             case API_DOMAIN.ORDER.toString(): 
-            return new OrderDomain(data);
+            return new OrderDomain(data).json();
             
             case API_DOMAIN.ORDER_ITEM.toString(): 
-            return new OrderItemDomain(data);
+            return new OrderItemDomain(data).json();
 
             case API_DOMAIN.PERMISSION.toString(): 
-            return new PermissionDomain(data);
+            return new PermissionDomain(data).json();
 
             case API_DOMAIN.PRODUCT_IMAGE.toString(): 
-            return new ProductImageDomain(data);
+            return new ProductImageDomain(data).json();
 
             case API_DOMAIN.SOURCE.toString(): 
-            return new SourceDomain(data);
+            return new SourceDomain(data).json();
             
             default: throw new Error(`${type} is not suppported.`)
         }

@@ -1,13 +1,13 @@
 import { API_DOMAIN, TYPES, USER_WORKFLOW } from "../../const";
 import { ICreateProductInput, ICreateProductOutput } from "../../controller";
-import { ProductDomain } from "../../domain";
+import { IProductDomain, ProductDomain } from "../../domain";
 import { IProductAttributeRepository, IProductCategoryRepository, IProductRepository, Operators } from "../../infrastructure";
 import { namedInject } from "../../infrastructure/ioc";
 import { CreateWorkflow, ICreateWorkflow } from "../base";
 
-export interface ICreateProductWorkflow extends ICreateWorkflow<ProductDomain, ICreateProductInput, ICreateProductOutput> { }
+export interface ICreateProductWorkflow extends ICreateWorkflow<IProductDomain, ICreateProductInput, ICreateProductOutput> { }
 
-export class CreateProductWorkflow extends CreateWorkflow<ProductDomain, ICreateProductInput, ICreateProductOutput> {
+export class CreateProductWorkflow extends CreateWorkflow<IProductDomain, ICreateProductInput, ICreateProductOutput> {
     get DOMAIN() {
         return API_DOMAIN.PRODUCT;
     }
@@ -30,7 +30,7 @@ export class CreateProductWorkflow extends CreateWorkflow<ProductDomain, ICreate
         super(repository)
     }
 
-    async validate(entity: ProductDomain): Promise<void> {
+    async validate(entity: IProductDomain): Promise<void> {
         const isExisted = await this.repository.find({
             filters: [
                 { code: 'name', operator: Operators.Equals, value: [entity.name] }

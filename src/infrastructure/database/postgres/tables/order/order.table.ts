@@ -1,13 +1,13 @@
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance, ModelOptions } from "../../../index";
 import { DATABASE, TABLE, TYPES } from "../../../../../const";
-import { OrderDomain } from "../../../../../domain";
+import { IOrderDomain, OrderDomain } from "../../../../../domain";
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from "../base";
 
-export interface IOrderInstance extends ModelInstance<OrderDomain> {}
+export interface IOrderInstance extends ModelInstance<IOrderDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.ORDER)
-export class OrderModel extends BasePostgresTable<OrderDomain, IOrderInstance> {
+export class OrderModel extends BasePostgresTable<IOrderDomain, IOrderInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IOrderInstance> = {
             id: {

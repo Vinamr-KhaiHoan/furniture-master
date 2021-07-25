@@ -4,10 +4,10 @@ import { IProductDomain, ProductDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface IProductInstance extends ModelInstance<ProductDomain> {}
+export interface IProductInstance extends ModelInstance<IProductDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.PRODUCT)
-export class ProductModel extends BasePostgresTable<ProductDomain, IProductInstance> {
+export class ProductModel extends BasePostgresTable<IProductDomain, IProductInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IProductInstance> = {
             id: {

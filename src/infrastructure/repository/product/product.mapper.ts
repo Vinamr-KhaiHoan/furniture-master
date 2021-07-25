@@ -1,12 +1,12 @@
 import { API_DOMAIN, TYPES } from "../../../const";
-import { ProductDomain } from "../../../domain";
+import { IProductDomain, ProductDomain } from "../../../domain";
 import { singletonNamedProvide } from "../../ioc";
 import { BaseDatabMapper, IDataMapper } from "../base";
 
-export interface IProductMapper extends IDataMapper<ProductDomain> { }
+export interface IProductMapper extends IDataMapper<IProductDomain> { }
 
 @singletonNamedProvide(TYPES.MAPPER, API_DOMAIN.PRODUCT)
-export class ProductMapper extends BaseDatabMapper<ProductDomain> implements IProductMapper {
+export class ProductMapper extends BaseDatabMapper<IProductDomain> implements IProductMapper {
     protected entityType = API_DOMAIN.PRODUCT;
 
     get toEntityFields() {

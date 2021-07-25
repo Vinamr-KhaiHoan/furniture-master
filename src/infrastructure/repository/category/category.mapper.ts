@@ -1,28 +1,13 @@
 import { API_DOMAIN, TYPES } from "../../../const";
-import { CategoryDomain } from "../../../domain";
+import { CategoryDomain, ICategoryDomain } from "../../../domain";
 import { singletonNamedProvide } from "../../ioc";
 import { BaseDatabMapper, IDataMapper } from "../base";
 
-export interface ICategoryMapper extends IDataMapper<CategoryDomain> { }
+export interface ICategoryMapper extends IDataMapper<ICategoryDomain> { }
 
 @singletonNamedProvide(TYPES.MAPPER, API_DOMAIN.CATEGORY)
-export class CategoryMapper extends BaseDatabMapper<CategoryDomain> implements ICategoryMapper {
+export class CategoryMapper extends BaseDatabMapper<ICategoryDomain> implements ICategoryMapper {
     protected entityType = API_DOMAIN.CATEGORY;
-
-    get toDatabaseFields() {
-        const toDatabaseFields: string[] = [
-            'image',
-            'name',
-            'status',
-            'description',
-            'createdBy',
-            'createdAt',
-            'updatedBy',
-            'updatedAt'
-        ]
-
-        return toDatabaseFields
-    }
 
     get toEntityFields() {
         const toEntityFields: string[] = [
@@ -38,5 +23,20 @@ export class CategoryMapper extends BaseDatabMapper<CategoryDomain> implements I
         ]
 
         return toEntityFields;
+    }
+
+    get toDatabaseFields() {
+        const toDatabaseFields: string[] = [
+            'image',
+            'name',
+            'status',
+            'description',
+            'createdBy',
+            'createdAt',
+            'updatedBy',
+            'updatedAt'
+        ]
+
+        return toDatabaseFields
     }
 }

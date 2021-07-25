@@ -1,16 +1,16 @@
 import { API_DOMAIN, CATEGORY_OUTPUT, CATEGORY_WORKFLOW, TYPES } from "../../../const";
 import { ICreateCategoryInput, ICreateCategoryOutput } from "../../../controller";
-import { CategoryDomain } from "../../../domain";
+import { CategoryDomain, ICategoryDomain } from "../../../domain";
 import { ICategoryRepository, Operators } from "../../../infrastructure";
 import { constructorProvide, namedInject, singletonNamedProvide } from "../../../infrastructure/ioc";
 import { CreateWorkflow, ICreateWorkflow } from "../../base";
 
-export interface ICreateCaterogyWorkflow extends ICreateWorkflow<CategoryDomain, ICreateCategoryInput, ICreateCategoryOutput> {
+export interface ICreateCaterogyWorkflow extends ICreateWorkflow<ICategoryDomain, ICreateCategoryInput, ICreateCategoryOutput> {
 
 }
 
 @singletonNamedProvide(TYPES.WORKFLOW, CATEGORY_WORKFLOW.CREATE)
-export class CreateCategoryWorkflow extends CreateWorkflow<CategoryDomain, ICreateCategoryInput, ICreateCategoryOutput> {
+export class CreateCategoryWorkflow extends CreateWorkflow<ICategoryDomain, ICreateCategoryInput, ICreateCategoryOutput> {
     get DOMAIN() {
         return API_DOMAIN.CATEGORY;
     }
@@ -26,7 +26,7 @@ export class CreateCategoryWorkflow extends CreateWorkflow<CategoryDomain, ICrea
         super(repository)
     }
 
-    async validate(entity: CategoryDomain): Promise<void> {
+    async validate(entity: ICategoryDomain): Promise<void> {
         const isExisted = await this.repository.find({
             filters: [
                 { code: 'name', operator: Operators.Equals, value: entity.name }

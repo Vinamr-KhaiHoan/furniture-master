@@ -1,13 +1,14 @@
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance, ModelOptions } from '../../..';
 import { DATABASE, TABLE, TYPES } from '../../../../../const';
+import { ICustomerDomain } from '../../../../../domain';
 import { CustomerDomain } from '../../../../../domain/customer/customer.domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface ICustomerInstance extends ModelInstance<CustomerDomain> {}
+export interface ICustomerInstance extends ModelInstance<ICustomerDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.CUSTOMER)
-export class CustomerModel extends BasePostgresTable<CustomerDomain, ICustomerInstance> {
+export class CustomerModel extends BasePostgresTable<ICustomerDomain, ICustomerInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<ICustomerInstance> = {
             id: {

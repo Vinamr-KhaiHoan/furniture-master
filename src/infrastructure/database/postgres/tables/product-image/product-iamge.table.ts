@@ -1,13 +1,13 @@
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance, ModelOptions } from "../../..";
 import { DATABASE, TABLE, TYPES } from "../../../../../const";
-import { ProductImageDomain } from "../../../../../domain";
+import { IProductImageDomain, ProductImageDomain } from "../../../../../domain";
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from "../base";
 
-export interface IProductImageInstance extends ModelInstance<ProductImageDomain> {}
+export interface IProductImageInstance extends ModelInstance<IProductImageDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.PRODUCT_IMAGE)
-export class ProductImageModel extends BasePostgresTable<ProductImageDomain, IProductImageInstance> {
+export class ProductImageModel extends BasePostgresTable<IProductImageDomain, IProductImageInstance> {
     get attributes() {
         const attibutes: DatabaseModelAttributes<IProductImageInstance> = {
             id: {

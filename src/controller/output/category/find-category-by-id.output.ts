@@ -3,29 +3,24 @@ import { CategoryDomain, ICategoryDomain } from "../../../domain";
 import { constructorProvide } from "../../../infrastructure/ioc";
 import { FindByIdOutput, IFindByIdOutput } from "../base";
 
-export interface IFindCategoryByIdOutput extends IFindByIdOutput<CategoryDomain> {
-    category: ICategoryDomain;
+export interface IFindCategoryByIdOutput extends IFindByIdOutput<ICategoryDomain> {
 }
 
 @constructorProvide(CATEGORY_OUTPUT.FIND_BY_ID)
-export class FindCategoryByIdOutput extends FindByIdOutput<CategoryDomain> implements IFindCategoryByIdOutput {
+export class FindCategoryByIdOutput extends FindByIdOutput<ICategoryDomain> implements IFindCategoryByIdOutput {
     constructor(output: IFindCategoryByIdOutput) {
         super(output)
-    }
-
-    get category() {
-        return this.output.entity.json();
     }
 
     get response() {
         const {
             message,
-            category
+            entity
         } = this;
 
         return {
             message,
-            category
+            entity
         }
     }
 }

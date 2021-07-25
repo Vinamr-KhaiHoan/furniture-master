@@ -1,20 +1,21 @@
 import { API_DOMAIN, NAMES, TYPES } from '../../../const';
-import { UserDomain } from '../../../domain';
+import { IUserDomain, UserDomain } from '../../../domain';
 import { DatabaseModel, IDatabase } from '../../database';
 import { namedInject, singletonNamedProvide } from '../../ioc';
 import { BasePostgresRepository, IDataMapper, IRepository } from '../base';
-import { Operators } from '..';
+import { Operators } from '../type';
+import { IUserMapper } from './user.mapper';
 
-export interface IUserRepository extends IRepository<UserDomain> {
-    findByEmail(email: string, select?: string[]): Promise<UserDomain>
+export interface IUserRepository extends IRepository<IUserDomain> {
+    findByEmail(email: string, select?: string[]): Promise<IUserDomain>
 }
 
 @singletonNamedProvide(TYPES.REPOSITORY, API_DOMAIN.USER)
-export class UserRepository extends BasePostgresRepository<UserDomain> implements IUserRepository {
-    model: DatabaseModel<UserDomain>;
+export class UserRepository extends BasePostgresRepository<IUserDomain> implements IUserRepository {
+    model: DatabaseModel<IUserDomain>;
     
     @namedInject(TYPES.MAPPER, API_DOMAIN.USER)
-    protected mapper: IDataMapper<UserDomain> 
+    protected mapper: IUserMapper;
 
     constructor(
         @namedInject(TYPES.DATABASE, NAMES.POSTGRES)
@@ -25,7 +26,7 @@ export class UserRepository extends BasePostgresRepository<UserDomain> implement
         this.model = this.postgresDatabase.dbModels.user;
     }
 
-    public async findByEmail(email: string, select?: string[]): Promise<UserDomain> {
+    public async findByEmail(email: string, select?: string[]): Promise<IUserDomain> {
         const doc = await this.find({
             filters: [{ code: 'email', operator: Operators.Equals, value: email}],
             select,
