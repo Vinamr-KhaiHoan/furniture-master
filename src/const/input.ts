@@ -22,3 +22,10 @@ export const ATTRIBUTE_INPUT = {
     FIND_BY_ID: Symbol.for('FIND_ATTRIBUTE_BY_ID_INPUT'),
     PAGINATE: Symbol.for('PAGINATE_ATTRIBUTE_INPUT')
 }
+
+export const PRODUCT_INPUT = {
+    CREATE: Symbol.for('CREATE_PRODUCT_INPUT'),
+    UPDATE: Symbol.for('UPDATE_PRODUCT_INPUT'),
+    FIND_BY_ID: Symbol.for('FIND_PRODUCT_BY_ID_INPUT'),
+    PAGINATE: Symbol.for('PAGINATE_PRODUCT_INPUT')
+}
