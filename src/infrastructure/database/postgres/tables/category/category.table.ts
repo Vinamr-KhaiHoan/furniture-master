@@ -5,10 +5,10 @@ import { CategoryDomain, ICategoryDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface ICategoryInstance extends ModelInstance<CategoryDomain> {}
+export interface ICategoryInstance extends ModelInstance<ICategoryDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.CATEGORY)
-export class CategoryModel extends BasePostgresTable<CategoryDomain, ICategoryInstance> {
+export class CategoryModel extends BasePostgresTable<ICategoryDomain, ICategoryInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<ICategoryInstance> = {
             id: {

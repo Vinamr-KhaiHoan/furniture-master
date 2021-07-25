@@ -1,14 +1,14 @@
 import { ModelOptions } from 'sequelize/types';
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance } from '../../..';
 import { DATABASE, TABLE, TYPES } from '../../../../../const';
-import { OrderItemDomain } from '../../../../../domain';
+import { IOrderItemDomain, OrderItemDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface IOrderItemInstance extends ModelInstance<OrderItemDomain> {}
+export interface IOrderItemInstance extends ModelInstance<IOrderItemDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.ORDER_ITEM)
-export class OrderItemModel extends BasePostgresTable<OrderItemDomain, IOrderItemInstance> {
+export class OrderItemModel extends BasePostgresTable<IOrderItemDomain, IOrderItemInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IOrderItemInstance> = {
             id: {

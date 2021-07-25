@@ -4,29 +4,24 @@ import { constructorProvide } from "../../../infrastructure/ioc";
 import { ICreateUserInput } from "../../input/user/create-user.input";
 import { CreateOutput, ICreateOutput } from "../base";
 
-export interface ICreateUserOutput extends ICreateOutput<UserDomain> {
-    user: IUserDomain;
+export interface ICreateUserOutput extends ICreateOutput<IUserDomain> {
 }
 
 @constructorProvide(USER_OUTPUT.CREATE)
-export class CreateUserOutput extends CreateOutput<UserDomain> implements ICreateUserOutput {
+export class CreateUserOutput extends CreateOutput<IUserDomain> implements ICreateUserOutput {
     constructor(output: ICreateUserOutput) {
         super(output)
-    }
-
-    get user() {
-        return this.entity.json();
     }
 
     get response() {
         const {
             message,
-            user
+            entity
         } = this;
         
         return {
             message,
-            user
+            entity
         }
     }
 }

@@ -1,14 +1,14 @@
 import { ModelOptions } from 'sequelize/types';
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance } from '../../..';
 import { DATABASE, TABLE, TYPES } from '../../../../../const';
-import { PermissionDomain } from '../../../../../domain';
+import { IPermissionDomain, PermissionDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface IPermissionInstance extends ModelInstance<PermissionDomain> {}
+export interface IPermissionInstance extends ModelInstance<IPermissionDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.PERMISSION)
-export class PermissionModel extends BasePostgresTable<PermissionDomain, IPermissionInstance> {
+export class PermissionModel extends BasePostgresTable<IPermissionDomain, IPermissionInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IPermissionInstance> = {
             id: {

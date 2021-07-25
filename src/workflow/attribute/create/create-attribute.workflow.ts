@@ -1,14 +1,14 @@
 import { API_DOMAIN, ATTRIBUTE_WORKFLOW, TYPES } from "../../../const";
 import { ICreateAttributeInput, ICreateAttributeOutput } from "../../../controller";
-import { AttributeDomain } from "../../../domain";
+import { AttributeDomain, IAttributeDomain } from "../../../domain";
 import { IAttributeRepository, Operators } from "../../../infrastructure";
 import { namedInject, singletonNamedProvide } from "../../../infrastructure/ioc";
 import { CreateWorkflow, ICreateWorkflow } from "../../base";
 
-export interface ICreateAttributeWorkflow extends ICreateWorkflow<AttributeDomain, ICreateAttributeInput, ICreateAttributeOutput> {}
+export interface ICreateAttributeWorkflow extends ICreateWorkflow<IAttributeDomain, ICreateAttributeInput, ICreateAttributeOutput> {}
 
 @singletonNamedProvide(TYPES.WORKFLOW, ATTRIBUTE_WORKFLOW.CREATE)
-export class CreateAttributeWorkflow extends CreateWorkflow<AttributeDomain, ICreateAttributeInput, ICreateAttributeOutput> {
+export class CreateAttributeWorkflow extends CreateWorkflow<IAttributeDomain, ICreateAttributeInput, ICreateAttributeOutput> {
     get DOMAIN() {
         return API_DOMAIN.ATTRIBUTE;
     }

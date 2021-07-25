@@ -1,14 +1,14 @@
 import { ModelOptions } from 'sequelize/types';
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance } from '../../..';
 import { DATABASE, TABLE, TYPES } from '../../../../../const';
-import { MetadataDomain } from '../../../../../domain';
+import { IMetadataDomain, MetadataDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface IMetadataInstance extends ModelInstance<MetadataDomain> {}
+export interface IMetadataInstance extends ModelInstance<IMetadataDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.METADATA)
-export class MetadataModel extends BasePostgresTable<MetadataDomain, IMetadataInstance> {
+export class MetadataModel extends BasePostgresTable<IMetadataDomain, IMetadataInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IMetadataInstance> = {
             id: {

@@ -7,7 +7,7 @@ import { CreateInput, ICreateInput } from "../base";
 export interface ICreateUserInput extends ICreateInput, IUser {}
 
 @constructorProvide(USER_INPUT.CREATE)
-export class CreateUserInput extends CreateInput<UserDomain> implements ICreateUserInput {
+export class CreateUserInput extends CreateInput<ICreateUserInput> implements ICreateUserInput {
     constructor(req: Request) {
         super(req)
     }

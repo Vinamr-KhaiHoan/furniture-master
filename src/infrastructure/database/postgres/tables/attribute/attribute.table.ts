@@ -1,13 +1,13 @@
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance, ModelOptions } from '../../..';
 import { DATABASE, TABLE, TYPES } from '../../../../../const';
-import { AttributeDomain } from '../../../../../domain';
+import { AttributeDomain, IAttributeDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface IAttributeInstance extends ModelInstance<AttributeDomain> {}
+export interface IAttributeInstance extends ModelInstance<IAttributeDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.ATTRIBUTE)
-export class AttributeModel extends BasePostgresTable<AttributeDomain, IAttributeInstance> {
+export class AttributeModel extends BasePostgresTable<IAttributeDomain, IAttributeInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IAttributeInstance> = {
             id: {

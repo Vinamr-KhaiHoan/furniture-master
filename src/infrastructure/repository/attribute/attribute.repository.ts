@@ -1,17 +1,18 @@
 import { API_DOMAIN, NAMES, TYPES } from "../../../const";
-import { AttributeDomain } from "../../../domain";
+import { AttributeDomain, IAttributeDomain } from "../../../domain";
 import { DatabaseModel, IDatabase } from "../../database";
 import { namedInject, singletonNamedProvide } from "../../ioc";
 import { BasePostgresRepository, IDataMapper, IRepository } from "../base";
+import { IAttributeMapper } from "./attribute.mapper";
 
-export interface IAttributeRepository extends IRepository<AttributeDomain> {}
+export interface IAttributeRepository extends IRepository<IAttributeDomain> {}
 
 @singletonNamedProvide(TYPES.REPOSITORY, API_DOMAIN.ATTRIBUTE)
-export class AttributeRepository extends BasePostgresRepository<AttributeDomain> implements IAttributeRepository {
-    model: DatabaseModel<AttributeDomain>;
+export class AttributeRepository extends BasePostgresRepository<IAttributeDomain> implements IAttributeRepository {
+    model: DatabaseModel<IAttributeDomain>;
     
     @namedInject(TYPES.MAPPER, API_DOMAIN.ATTRIBUTE)
-    protected mapper: IDataMapper<AttributeDomain> 
+    protected mapper: IAttributeMapper;
 
     constructor(
         @namedInject(TYPES.DATABASE, NAMES.POSTGRES)

@@ -43,7 +43,7 @@ export class SignInWorkflow extends BaseWorkflow<ISignInInput, ISignInOutput> im
             throw this.errorFactory.unauthorizedError(`Invalid Password`);
         }
 
-        const token = this.jwtHelper.signin(isExisted.json())
+        const token = this.jwtHelper.signin(isExisted)
 
         return { message: `successfully`, token: token }
     }

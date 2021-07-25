@@ -3,28 +3,22 @@ import { AttributeDomain, IAttributeDomain } from "../../../domain";
 import { constructorProvide } from "../../../infrastructure/ioc";
 import { FindByIdOutput, IFindByIdOutput } from "../base";
 
-export interface IFindAttributeByIdOutput extends IFindByIdOutput<AttributeDomain> {
-    attribute: IAttributeDomain;
-}
+export interface IFindAttributeByIdOutput extends IFindByIdOutput<IAttributeDomain> {}
 
 @constructorProvide(ATTRIBUTE_OUTPUT.FIND_BY_ID)
-export class FindAttributeByIdOutput extends FindByIdOutput<AttributeDomain> implements IFindAttributeByIdOutput {
+export class FindAttributeByIdOutput extends FindByIdOutput<IAttributeDomain> implements IFindAttributeByIdOutput {
     constructor(output: IFindAttributeByIdOutput) {
         super(output)
     }
 
-    get attribute() {
-        return this.entity.json();
-    }
-
     get response() {
         const {
-            attribute,
+            entity,
             message
         } = this;
 
         return {
-            attribute,
+            entity,
             message
         }
     }

@@ -1,11 +1,13 @@
-import { UserDomain } from "../../../domain";
+import { IUserDomain, UserDomain } from "../../../domain";
 import { BaseDatabMapper, IDataMapper } from "../base";
 import { inject, singletonNamedProvide } from '../../ioc';
 import { API_DOMAIN, TYPES } from "../../../const";
 import { IPasswordHelper } from "../../utils";
 
+export interface IUserMapper extends IDataMapper<IUserDomain> {}
+
 @singletonNamedProvide(TYPES.MAPPER, API_DOMAIN.USER)
-export class UserMapper extends BaseDatabMapper<UserDomain> implements IDataMapper<UserDomain> {
+export class UserMapper extends BaseDatabMapper<IUserDomain> implements IDataMapper<IUserDomain> {
     @inject(TYPES.PASSWORD_HELPER) protected passwordHelper: IPasswordHelper;
 
     protected entityType = API_DOMAIN.USER;

@@ -5,10 +5,10 @@ import { IUserDomain, UserDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface IUserInstance extends ModelInstance<UserDomain> {}
+export interface IUserInstance extends ModelInstance<IUserDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.USER)
-export class UserModel extends BasePostgresTable<UserDomain, IUserInstance> {
+export class UserModel extends BasePostgresTable<IUserDomain, IUserInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IUserInstance> = {
             id: {

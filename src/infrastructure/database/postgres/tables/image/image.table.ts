@@ -1,14 +1,14 @@
 import { ModelOptions } from 'sequelize/types';
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance } from '../../..';
 import { DATABASE, TABLE, TYPES } from '../../../../../const';
-import { ImageDomain } from '../../../../../domain';
+import { IImageDomain, ImageDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface IImageInstance extends ModelInstance<ImageDomain> {}
+export interface IImageInstance extends ModelInstance<IImageDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.IMAGE)
-export class ImageModel extends BasePostgresTable<ImageDomain, IImageInstance> {
+export class ImageModel extends BasePostgresTable<IImageDomain, IImageInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IImageInstance> = {
             id: {

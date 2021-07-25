@@ -6,10 +6,10 @@ import { ProductCategoryDomain } from '../../../../../domain/product-caterogy/pr
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
-export interface IProductCategoryInsance extends ModelInstance<ProductCategoryDomain> {}
+export interface IProductCategoryInsance extends ModelInstance<IProductCategoryDomain> {}
 
 @singletonNamedProvide(TYPES.DATABASE, DATABASE.PRODUCT_CATEGORY)
-export class ProductCategoryModel extends BasePostgresTable<ProductCategoryDomain, IProductCategoryInsance> {
+export class ProductCategoryModel extends BasePostgresTable<IProductCategoryDomain, IProductCategoryInsance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IProductCategoryInsance> = {
             id: {
