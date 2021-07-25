@@ -1,9 +1,9 @@
-import { API_DOMAIN, TYPES, USER_WORKFLOW } from "../../const";
-import { ICreateProductInput, ICreateProductOutput } from "../../controller";
-import { IProductDomain, ProductDomain } from "../../domain";
-import { IProductAttributeRepository, IProductCategoryRepository, IProductRepository, Operators } from "../../infrastructure";
-import { namedInject } from "../../infrastructure/ioc";
-import { CreateWorkflow, ICreateWorkflow } from "../base";
+import { API_DOMAIN, TYPES, USER_WORKFLOW } from "../../../const";
+import { ICreateProductInput, ICreateProductOutput } from "../../../controller";
+import { IProductDomain, ProductDomain } from "../../../domain";
+import { IProductAttributeRepository, IProductCategoryRepository, IProductRepository, Operators } from "../../../infrastructure";
+import { namedInject } from "../../../infrastructure/ioc";
+import { CreateWorkflow, ICreateWorkflow } from "../../base";
 
 export interface ICreateProductWorkflow extends ICreateWorkflow<IProductDomain, ICreateProductInput, ICreateProductOutput> { }
 
