@@ -1,12 +1,24 @@
 import { Request } from "express";
 import { PRODUCT_INPUT } from "../../../const";
-import { IProduct } from "../../../domain";
-import { singletonProvide } from "../../../infrastructure/ioc";
+import { IAttributeDomain, ICategoryDomain, IProduct } from "../../../domain";
+import { constructorProvide, singletonProvide } from "../../../infrastructure/ioc";
 import { CreateInput, ICreateInput } from "../base";
 
-export interface ICreateProductInput extends ICreateInput, IProduct {}
+export interface ICreateProductInput extends ICreateInput {
+    image: string;
+    name: string;
+    status: number;
+    slug: string;
+    description: string;
+    attributes: (IAttributeDomain | number)[];
+    categories: (ICategoryDomain | number)[];
+    createdBy: number;
+    createdAt: Date;
+    updatedBy: number;
+    updatedAt: Date
+}
 
-@singletonProvide(PRODUCT_INPUT.CREATE)
+@constructorProvide(PRODUCT_INPUT.CREATE)
 export class CreateProductInput extends CreateInput<ICreateProductInput> implements ICreateProductInput {
     constructor(req: Request) {
         super(req)

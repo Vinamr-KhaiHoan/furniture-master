@@ -12,3 +12,6 @@ export * from './product-category';
 export * from './product-image';
 export * from './source';
 export * from './user';
+export * from './attribute-value';
+export * from './product-sku';
+export * from './product-sku-attribute-value';

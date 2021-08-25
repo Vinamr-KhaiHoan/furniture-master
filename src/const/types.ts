@@ -31,3 +31,7 @@ export const TYPES = {
     CONTEXT_SERVICE: Symbol.for('CONTEXT_SERVICE'),
     WORKFLOW: Symbol.for('WORKFLOW')
 }
+
+export enum ELEMENTS_IN_PAGE {
+    PRODUCT = 10
+};

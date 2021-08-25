@@ -1,13 +1,13 @@
 import { ModelOptions } from 'sequelize/types';
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance } from '../../..';
-import { DATABASE, TABLE, TYPES } from '../../../../../const';
+import { API_DOMAIN, DATABASE, MODEL, TABLE, TYPES } from '../../../../../const';
 import { IOrderItemDomain, OrderItemDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
 export interface IOrderItemInstance extends ModelInstance<IOrderItemDomain> {}
 
-@singletonNamedProvide(TYPES.DATABASE, DATABASE.ORDER_ITEM)
+@singletonNamedProvide(TYPES.DATABASE, API_DOMAIN.ORDER_ITEM)
 export class OrderItemModel extends BasePostgresTable<IOrderItemDomain, IOrderItemInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IOrderItemInstance> = {
@@ -47,8 +47,8 @@ export class OrderItemModel extends BasePostgresTable<IOrderItemDomain, IOrderIt
         return attributes
     }
 
-    get tableName() {
-        return 'orderItem'
+    get modelName() {
+        return MODEL.ORDER_ITEM;
     }
 
     get options() {

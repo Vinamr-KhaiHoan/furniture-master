@@ -89,6 +89,7 @@ export type DatabaseModels = {
     product?: DatabaseModel,
     category?: DatabaseModel,
     attribute?:DatabaseModel,
+    attributeValue?: DatabaseModel,
     productAttribute?: DatabaseModel,
     productCategory?: DatabaseModel,
     customer?: DatabaseModel,
@@ -97,7 +98,9 @@ export type DatabaseModels = {
     orderItem?: DatabaseModel,
     productImage?: DatabaseModel,
     source?: DatabaseModel,
-    image?: DatabaseModel
+    image?: DatabaseModel,
+    productSKU?: DatabaseModel,
+    productSKUAttributeValue?: DatabaseModel
 };
 
 export * from './query-builder';

@@ -1,8 +1,10 @@
 import { IDomain } from "../../infrastructure/base/domain";
+import { IAttributeDomain } from "../attribute";
+import { IProductDomain } from "../product";
 
 export interface IProductAttribute {
-    productId: number;
-    attributeId: number;
+    productId: number | IProductDomain;
+    attributeId: number | IAttributeDomain;
     status: number;
     createdAt: Date;
     updatedAt: Date;

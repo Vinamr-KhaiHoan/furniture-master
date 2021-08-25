@@ -23,6 +23,6 @@ export class FindCategoryByIdInputSchema implements ISchema {
   type = 'object';
   required = ['id'];
   properties = {
-    id: { type: 'integer', minimum: 1 }
+    id: { type: 'string' }
   }
 }

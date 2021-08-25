@@ -44,8 +44,14 @@ export abstract class BasePostgresRepository<D extends IDomain> implements IRepo
         protected postgresDatabase: IDatabase
     ) {}
 
-    paginate(criteria: Criteria): Promise<PaginateResult<D>> {
-        throw new Error("Method not implemented.");
+    async paginate(criteria: Criteria): Promise<PaginateResult<D>> {
+        const paginateQuery = this.queryFactory.createPaginateQuery(this.model)
+
+        const result = await paginateQuery.execute(criteria)
+
+        result.docs = result.docs.map(doc => { return this.mapper.toEntity(doc) })
+
+        return result;
     }
 
     public async find(criteria: Criteria): Promise<D[]> {

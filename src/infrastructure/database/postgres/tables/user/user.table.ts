@@ -1,13 +1,13 @@
 
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance, ModelOptions } from '../../..';
-import { DATABASE, TABLE, TYPES } from '../../../../../const';
+import { API_DOMAIN, DATABASE, MODEL, TABLE, TYPES } from '../../../../../const';
 import { IUserDomain, UserDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
 export interface IUserInstance extends ModelInstance<IUserDomain> {}
 
-@singletonNamedProvide(TYPES.DATABASE, DATABASE.USER)
+@singletonNamedProvide(TYPES.DATABASE, API_DOMAIN.USER)
 export class UserModel extends BasePostgresTable<IUserDomain, IUserInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IUserInstance> = {
@@ -73,8 +73,8 @@ export class UserModel extends BasePostgresTable<IUserDomain, IUserInstance> {
         return attributes
     }
 
-    get tableName() {
-        return 'user'
+    get modelName() {
+        return MODEL.USER;
     }
 
     get options() {

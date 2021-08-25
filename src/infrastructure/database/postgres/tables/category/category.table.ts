@@ -1,13 +1,13 @@
 import { ModelOptions } from 'sequelize/types';
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance } from '../../..';
-import { DATABASE, TABLE, TYPES } from '../../../../../const';
+import { API_DOMAIN, DATABASE, MODEL, TABLE, TYPES } from '../../../../../const';
 import { CategoryDomain, ICategoryDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
 export interface ICategoryInstance extends ModelInstance<ICategoryDomain> {}
 
-@singletonNamedProvide(TYPES.DATABASE, DATABASE.CATEGORY)
+@singletonNamedProvide(TYPES.DATABASE, API_DOMAIN.CATEGORY)
 export class CategoryModel extends BasePostgresTable<ICategoryDomain, ICategoryInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<ICategoryInstance> = {
@@ -62,8 +62,8 @@ export class CategoryModel extends BasePostgresTable<ICategoryDomain, ICategoryI
         return attributes;
     }
 
-    get tableName() {
-        return 'category'
+    get modelName() {
+        return MODEL.CATEGORY;
     }
 
     get options() {

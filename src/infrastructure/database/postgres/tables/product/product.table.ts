@@ -1,12 +1,12 @@
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance, ModelOptions } from '../../..';
-import { DATABASE, TABLE, TYPES } from '../../../../../const';
+import { API_DOMAIN, DATABASE, MODEL, TABLE, TYPES } from '../../../../../const';
 import { IProductDomain, ProductDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
 export interface IProductInstance extends ModelInstance<IProductDomain> {}
 
-@singletonNamedProvide(TYPES.DATABASE, DATABASE.PRODUCT)
+@singletonNamedProvide(TYPES.DATABASE, API_DOMAIN.PRODUCT)
 export class ProductModel extends BasePostgresTable<IProductDomain, IProductInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IProductInstance> = {
@@ -20,6 +20,11 @@ export class ProductModel extends BasePostgresTable<IProductDomain, IProductInst
                 type: DatabaseDataTypes.STRING,
                 allowNull: true,
                 field: 'product_image'
+            },
+            name: {
+                type: DatabaseDataTypes.STRING,
+                allowNull: true,
+                field: 'product_name'
             },
             status: {
                 type: DatabaseDataTypes.INTEGER,
@@ -61,8 +66,8 @@ export class ProductModel extends BasePostgresTable<IProductDomain, IProductInst
         return attributes;
     }
 
-    get tableName() {
-        return 'product'
+    get modelName() {
+        return MODEL.PRODUCT;
     }
     get options() {
         const options: ModelOptions = {

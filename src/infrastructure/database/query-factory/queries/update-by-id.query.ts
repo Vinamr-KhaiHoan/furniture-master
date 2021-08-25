@@ -46,6 +46,8 @@ export class UpdateByIdQuery {
       throw Error('NotFoundError');
     }
 
-    return doc.update(data, { transaction: this.ctx.transaction });
+    return doc.update(data, { 
+      transaction: this.ctx.transaction
+    });
   }
 }

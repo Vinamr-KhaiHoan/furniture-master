@@ -1,5 +1,5 @@
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance, ModelOptions } from '../../..';
-import { DATABASE, TABLE, TYPES } from '../../../../../const';
+import { API_DOMAIN, DATABASE, MODEL, TABLE, TYPES } from '../../../../../const';
 import { ICustomerDomain } from '../../../../../domain';
 import { CustomerDomain } from '../../../../../domain/customer/customer.domain';
 import { singletonNamedProvide } from '../../../../ioc';
@@ -7,7 +7,7 @@ import { BasePostgresTable } from '../base';
 
 export interface ICustomerInstance extends ModelInstance<ICustomerDomain> {}
 
-@singletonNamedProvide(TYPES.DATABASE, DATABASE.CUSTOMER)
+@singletonNamedProvide(TYPES.DATABASE, API_DOMAIN.CUSTOMER)
 export class CustomerModel extends BasePostgresTable<ICustomerDomain, ICustomerInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<ICustomerInstance> = {
@@ -72,8 +72,8 @@ export class CustomerModel extends BasePostgresTable<ICustomerDomain, ICustomerI
         return attributes;
     }
 
-    get tableName() {
-        return 'customer'
+    get modelName() {
+        return MODEL.CUSTOMER;
     }
 
     get options() {

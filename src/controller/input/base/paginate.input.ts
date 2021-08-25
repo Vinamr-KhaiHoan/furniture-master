@@ -14,10 +14,10 @@ export class PaginateInput<I extends IPaginateInput> extends BaseHttpInput<I> {
     }
 
     get limit() {
-        return this.input.limit;
+        return <number>this.input.limit;
     }
 
     get offset() {
-        return this.input.offset;
+        return <number>this.input.offset;
     }
 }

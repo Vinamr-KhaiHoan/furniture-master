@@ -24,6 +24,8 @@ export class UpdateQuery {
       throw Error('missing data');
     }
 
+    console.log(`data in update: `,data)
+
     const query = QueryParser.parse(criteria);
 
     // OwnerFilter.append(this.ctx, this.model.name, query);
@@ -37,6 +39,7 @@ export class UpdateQuery {
     return this.model.update(data, {
       where: query.options.where as WhereOptions<any>,
       transaction: this.ctx.transaction,
+      returning: true
     });
   }
 }

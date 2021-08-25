@@ -3,7 +3,7 @@ import { TYPES, LOGGER } from '../../../const';
 import { inject, injectable } from '../../ioc';
 
 export interface IDomain {
-    id: number
+    id?: number
 }
 
 

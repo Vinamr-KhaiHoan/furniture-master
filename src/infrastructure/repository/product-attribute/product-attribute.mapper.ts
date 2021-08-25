@@ -24,7 +24,6 @@ export class ProductAttributeMapper extends BaseDatabMapper<IProductAttributeDom
 
     get toDatabaseFields() {
         const toDatabaseFields: string[] = [
-            'id',
             'productId',
             'attributeId',
             'status',

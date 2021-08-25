@@ -38,6 +38,8 @@ export abstract class BaseDatabMapper<D extends IDomain> implements IDataMapper<
 
         const params = this.objectHelper.pick(entity, fields)
 
+        console.log(params)
+
         return this.objectHelper.omitByUndefined(params)
     }
 }

@@ -1,6 +1,6 @@
 import { ModelOptions } from 'sequelize/types';
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance } from '../../..';
-import { DATABASE, TABLE, TYPES } from '../../../../../const';
+import { API_DOMAIN, DATABASE, MODEL, TABLE, TYPES } from '../../../../../const';
 import { IProductCategoryDomain } from '../../../../../domain';
 import { ProductCategoryDomain } from '../../../../../domain/product-caterogy/product-category.domain';
 import { singletonNamedProvide } from '../../../../ioc';
@@ -8,7 +8,7 @@ import { BasePostgresTable } from '../base';
 
 export interface IProductCategoryInsance extends ModelInstance<IProductCategoryDomain> {}
 
-@singletonNamedProvide(TYPES.DATABASE, DATABASE.PRODUCT_CATEGORY)
+@singletonNamedProvide(TYPES.DATABASE, API_DOMAIN.PRODUCT_CATEGORY)
 export class ProductCategoryModel extends BasePostgresTable<IProductCategoryDomain, IProductCategoryInsance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IProductCategoryInsance> = {
@@ -16,22 +16,23 @@ export class ProductCategoryModel extends BasePostgresTable<IProductCategoryDoma
                 type: DatabaseDataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
-                field: 'product_attribute_id'
+                field: 'product_category_id'
             },
             productId: {
                 type: DatabaseDataTypes.INTEGER,
                 allowNull: false,
                 field: 'product_id',
             },
-            attributeId: {
+            categoryId: {
                 type: DatabaseDataTypes.INTEGER,
                 allowNull: true,
-                field: 'attribute_id'
+                field: 'category_id'
             },
             createdAt: {
                 type: DatabaseDataTypes.DATE,
                 allowNull: false,
-                field: 'created_at'
+                field: 'created_at',
+                defaultValue: DatabaseDataTypes.NOW
             },
             updatedAt: {
                 type: DatabaseDataTypes.DATE,
@@ -43,8 +44,8 @@ export class ProductCategoryModel extends BasePostgresTable<IProductCategoryDoma
         return attributes
     }
 
-    get tableName() {
-        return 'productCategory'
+    get modelName() {
+        return MODEL.PRODUCT_CATEGORY;
     }
 
     get options() {

@@ -1,13 +1,13 @@
 import { ModelOptions } from 'sequelize/types';
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance } from '../../..';
-import { DATABASE, TABLE, TYPES } from '../../../../../const';
+import { API_DOMAIN, DATABASE, MODEL, TABLE, TYPES } from '../../../../../const';
 import { IImageDomain, ImageDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
 export interface IImageInstance extends ModelInstance<IImageDomain> {}
 
-@singletonNamedProvide(TYPES.DATABASE, DATABASE.IMAGE)
+@singletonNamedProvide(TYPES.DATABASE, API_DOMAIN.IMAGE)
 export class ImageModel extends BasePostgresTable<IImageDomain, IImageInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IImageInstance> = {
@@ -47,8 +47,8 @@ export class ImageModel extends BasePostgresTable<IImageDomain, IImageInstance> 
         return attributes;
     }
 
-    get tableName() {
-        return 'image'
+    get modelName() {
+        return MODEL.IMAGE;
     }
 
     get options() {

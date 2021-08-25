@@ -16,6 +16,7 @@ export class CreateUserWorkflow extends CreateWorkflow<IUserDomain, ICreateUserI
     get id() {
         return USER_WORKFLOW.CREATE
     }
+    
 
     constructor(
         @namedInject(TYPES.REPOSITORY, API_DOMAIN.USER)
@@ -30,5 +31,9 @@ export class CreateUserWorkflow extends CreateWorkflow<IUserDomain, ICreateUserI
         if(isExistedUser) {
             throw this.errorFactory.unauthorizedError(`This email: ${entity.email} isn't existed.`)
         }
+    }
+
+    async execute(input: ICreateUserInput): Promise<ICreateUserOutput> {
+        return await super.execute(input);
     }
 }

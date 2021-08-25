@@ -1,8 +1,9 @@
 import { BaseHttpOutput, IBaseHttpOutput, IDomain } from '../../../infrastructure/base';
 import { injectable } from '../../../infrastructure/ioc';
 
-export interface IUpdateOutput<Entity extends IDomain> extends IBaseHttpOutput {
+export interface IUpdateOutput<D extends IDomain> extends IBaseHttpOutput {
     message: string;
+    entity: D;
 }
 
 @injectable()
@@ -13,5 +14,9 @@ export class UpdateOutput<Entity extends IDomain> extends BaseHttpOutput<IUpdate
 
     get message() {
         return this.output.message;
+    }
+
+    get entity() {
+        return this.output.entity;
     }
 }

@@ -4,13 +4,14 @@ import { QueryBuilder } from "../query-builder";
 import { Query } from "../query-factory";
 
 
-export class QueryParser{
-    public static parseOffsetAndLimit(data : Criteria) : {offset: number; limit: number} {
-        if(!data)
-             return null;
-        let {offset , limit} = data;
-    
-        if(!offset || !limit) 
+export class QueryParser {
+    public static parseOffsetAndLimit(data: Criteria): { offset: number; limit: number } {
+        if (!data)
+            return null;
+
+        let { offset, limit } = data;
+
+        if (!offset && !limit)
             return null;
 
         offset = Number(offset);
@@ -19,21 +20,21 @@ export class QueryParser{
             offset: isNaN(offset) ? 0 : offset, limit: isNaN(limit) ? 10 : limit
         }
     }
-    public static parseSort(sort : Sort) : [[string , string]] {
-        if(!sort || !sort.column)
+    public static parseSort(sort: Sort): [[string, string]] {
+        if (!sort || !sort.column)
             return null;
 
-        return [[sort.column , ['asc' , 'desc'].indexOf(sort.direction) > -1 ? sort.direction : 'asc']];
+        return [[sort.column, ['asc', 'desc'].indexOf(sort.direction) > -1 ? sort.direction : 'asc']];
     }
-    public static parseFilters(filters: Filter[]) : WhereOptions<any>{
-        if(!filters || !filters.length)
+    public static parseFilters(filters: Filter[]): WhereOptions<any> {
+        if (!filters || !filters.length)
             return {};
-        
-        const where : WhereOptions<any> = {}
-        
+
+        const where: WhereOptions<any> = {}
+
         filters.forEach(filter => {
-            if(!filter.code || !filter.operator || !filter.value) return
-            switch(filter.operator){
+            if (!filter.code || !filter.operator || !filter.value) return
+            switch (filter.operator) {
                 /**
                  * String
                  */
@@ -61,7 +62,7 @@ export class QueryParser{
                 case 'ends_with':
                     where[filter.code] = { $like: `%${filter.value}` };
                     break;
-        
+
                 /**
                  * Logic
                  */
@@ -71,14 +72,14 @@ export class QueryParser{
                 case 'is_not':
                     where[filter.code] = { $notIn: filter.value };
                     break;
-        
+
                 /**
                  * Array
                  */
                 case 'array_contains':
                     where[filter.code] = { $contains: filter.value };
                     break;
-        
+
                 /**
                  * Number
                  */
@@ -88,81 +89,90 @@ export class QueryParser{
                 case 'is_smaller_than':
                     where[filter.code] = { $lt: filter.value };
                     break;
-        
+
                 default:
             }
         })
         return where;
-    
+
     }
-    public static parseInclude(include : Include) : IncludeOptions {
-        if(!include || !include.field) 
+    public static parseInclude(include: Include): IncludeOptions {
+        if (!include || !include.field)
             return {}
-        const result : IncludeOptions = {
+        const result: IncludeOptions = {
             association: include.field,
-            attributes : {
+            attributes: {
                 exclude: ['password']
             }
         }
-        if(include.select)
+        if (include.select)
             result.attributes = include.select;
-        
-        if(include.filters)
+
+        if (include.filters)
             result.where = this.parseFilters(include.filters);
-        
-        if(include.includes)
+
+        if (include.includes)
             result.include = include.includes.map(_include => this.parseInclude(_include))
 
         return result;
 
     }
-    public static parseIncludes (includes : string) : IncludeOptions []{
-        try{
-            let arr : Include[]
+    public static parseIncludes(includes: string): IncludeOptions[] {
+        try {
+            let arr: Include[]
             arr = JSON.parse(includes)
-            
-            if(!arr || !arr.length)
+
+            if (!arr || !arr.length)
                 return []
             return arr.map(include => this.parseInclude(include))
 
-        }catch(err){
+        } catch (err) {
             return []
         }
     }
-    public static parseSearch(keyword : string) : WhereOptions<any> {
-        if(!keyword)
+    public static parseSearch(keyword: string): WhereOptions<any> {
+        if (!keyword)
             return null
-        if(/^\d{9}$/.test(keyword))
-            return {id : Number(keyword)}
-        
+        if (/^\d{9}$/.test(keyword))
+            return { id: Number(keyword) }
+
         return {
             name: {
-                $iLike : `%${keyword}%`
+                $iLike: `%${keyword}%`
             }
         }
     }
-    public static parse(data : Criteria) : Query{
+    public static parse(data: Criteria): Query {
         const builder = new QueryBuilder();
 
-        if(data.select){
-            const attributes : string[] = data.select
+        if (data.select) {
+            const attributes: string[] = data.select
             builder.setAttributes(attributes)
         }
-        
-        if(data.sort){
-            const order : [[string , string]] = this.parseSort(data.sort)
+
+        if (data.sort) {
+            const order: [[string, string]] = this.parseSort(data.sort)
             builder.setOrder(order);
         }
-        
-        if(data.transaction)
+
+        if (data.transaction)
             builder.setTransaction(data.transaction)
-        
-        if(data.filters){
+
+        if (data.filters) {
             const where = this.parseFilters(data.filters)
             builder.setWhere(where);
         }
 
-        if(data.includes && data.includes.length){
+        if (data.offset || data.limit) {
+            const offsetAndLimit = this.parseOffsetAndLimit(data);
+            console.log(`offsetAndLimit`, offsetAndLimit)
+            if (offsetAndLimit) {
+                builder.setOffset(offsetAndLimit.offset);
+                builder.setLimit(offsetAndLimit.limit);
+            }
+        }
+        
+        if (data.includes && data.includes.length) {
             const includes = data.includes.map(include => this.parseInclude(include))
 
             builder.setInclude(includes)

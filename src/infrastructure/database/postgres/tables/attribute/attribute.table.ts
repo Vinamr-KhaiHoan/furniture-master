@@ -1,12 +1,12 @@
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance, ModelOptions } from '../../..';
-import { DATABASE, TABLE, TYPES } from '../../../../../const';
+import { API_DOMAIN, DATABASE, MODEL, TABLE, TYPES } from '../../../../../const';
 import { AttributeDomain, IAttributeDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
 export interface IAttributeInstance extends ModelInstance<IAttributeDomain> {}
 
-@singletonNamedProvide(TYPES.DATABASE, DATABASE.ATTRIBUTE)
+@singletonNamedProvide(TYPES.DATABASE, API_DOMAIN.ATTRIBUTE)
 export class AttributeModel extends BasePostgresTable<IAttributeDomain, IAttributeInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IAttributeInstance> = {
@@ -51,8 +51,8 @@ export class AttributeModel extends BasePostgresTable<IAttributeDomain, IAttribu
         return attributes;
     }
 
-    get tableName() {
-        return 'attribute'
+    get modelName() {
+        return MODEL.ATTRIBUTE;
     }
 
     get options() {

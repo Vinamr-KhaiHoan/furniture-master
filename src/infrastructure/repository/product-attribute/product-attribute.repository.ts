@@ -11,7 +11,7 @@ export interface IProductAttributeRepository extends IRepository<IProductAttribu
 export class ProductAttributeRepository extends BasePostgresRepository<IProductAttributeDomain> implements IProductAttributeRepository {
     model: DatabaseModel<IProductAttributeDomain>
 
-    @namedInject(TYPES.MAPPER, API_DOMAIN.CATEGORY)
+    @namedInject(TYPES.MAPPER, API_DOMAIN.PRODUCT_ATTRIBUTE)
     protected mapper: IProductAttributeMapper;
 
     constructor(
@@ -20,6 +20,6 @@ export class ProductAttributeRepository extends BasePostgresRepository<IProductA
     ) {
         super(database)
 
-        this.model = this.postgresDatabase.dbModels.product;
+        this.model = this.postgresDatabase.dbModels.productAttribute;
     }
 }

@@ -15,10 +15,10 @@ export abstract class BasePostgresTable<M extends IDomain, I extends ModelInstan
 
     abstract attributes: DatabaseModelAttributes<I>
     abstract options: ModelOptions;
-    abstract tableName: string;
+    abstract modelName: string;
 
     define(connection: DatabaseConnection) {
-        this.model = connection.define(this.tableName, this.attributes, this.options) as any
+        this.model = connection.define(this.modelName, this.attributes, this.options) as any
         this.model.paginate = paginate
 
         return this.model

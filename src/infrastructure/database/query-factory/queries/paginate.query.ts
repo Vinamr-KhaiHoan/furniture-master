@@ -5,7 +5,6 @@ import { Context } from "../../../service";
 import { lazyInject } from "../../../ioc";
 import { TYPES } from "../../../../const";
 
-
 export class PaginateQuery {
   private model: DatabaseModel;
 

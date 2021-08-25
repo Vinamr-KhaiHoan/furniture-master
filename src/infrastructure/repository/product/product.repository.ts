@@ -11,7 +11,7 @@ export interface IProductRepository extends IRepository<IProductDomain> {}
 export class ProductRepository extends BasePostgresRepository<IProductDomain> implements IProductRepository {
     model: DatabaseModel<IProductDomain>
 
-    @namedInject(TYPES.MAPPER, API_DOMAIN.CATEGORY)
+    @namedInject(TYPES.MAPPER, API_DOMAIN.PRODUCT)
     protected mapper: IProductMapper;
 
     constructor(

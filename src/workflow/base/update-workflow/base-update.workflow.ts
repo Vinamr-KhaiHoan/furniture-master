@@ -28,8 +28,9 @@ export abstract class UpdateWorkflow<D extends IDomain, I extends IBaseHttpInput
     public async validate(id: number): Promise<void> {
         const isExisted = await this.repository.findById(id);
 
-        if (isExisted) {
-            throw this.errorFactory.unauthorizedError(`this ${this.DOMAIN.toString()} id: ${id} is not existed.`)
+        if (!isExisted) {
+            console.log(`pass here`)
+            throw this.errorFactory.unauthorizedError(`this ${Symbol.keyFor(this.DOMAIN).toLowerCase()} id: ${id} is not existed.`)
         }
     }
 

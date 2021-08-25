@@ -14,5 +14,8 @@ export * from './product-caterogy';
 export * from './product-image';
 export * from './source';
 export * from './user';
+export * from './product-sku';
+export * from './product-sku-attribute-value';
+export * from './attribute-value';
 
 export * from './entity-factory';

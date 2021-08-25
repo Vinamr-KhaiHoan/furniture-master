@@ -1,13 +1,13 @@
 import { ModelOptions } from 'sequelize/types';
 import { DatabaseDataTypes, DatabaseModelAttributes, ModelInstance } from '../../..';
-import { DATABASE, TABLE, TYPES } from '../../../../../const';
+import { API_DOMAIN, DATABASE, MODEL, TABLE, TYPES } from '../../../../../const';
 import { IPermissionDomain, PermissionDomain } from '../../../../../domain';
 import { singletonNamedProvide } from '../../../../ioc';
 import { BasePostgresTable } from '../base';
 
 export interface IPermissionInstance extends ModelInstance<IPermissionDomain> {}
 
-@singletonNamedProvide(TYPES.DATABASE, DATABASE.PERMISSION)
+@singletonNamedProvide(TYPES.DATABASE, API_DOMAIN.PERMISSION)
 export class PermissionModel extends BasePostgresTable<IPermissionDomain, IPermissionInstance> {
     get attributes() {
         const attributes: DatabaseModelAttributes<IPermissionInstance> = {
@@ -27,8 +27,8 @@ export class PermissionModel extends BasePostgresTable<IPermissionDomain, IPermi
         return attributes;
     }
 
-    get tableName() {
-        return 'permission'
+    get modelName() {
+        return MODEL.PERMISSION;
     }
 
     get options() {

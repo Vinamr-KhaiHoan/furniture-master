@@ -1,8 +1,10 @@
 import { IDomain } from "../../infrastructure/base/domain";
+import { ICategoryDomain } from "../category";
+import { IProductDomain } from "../product";
 
 export interface IProductCategory {
-    productId: number;
-    categoryId: number;
+    productId: number | IProductDomain;
+    categoryId: number | ICategoryDomain;
     status: number;
     createdAt: Date;
     updatedAt: Date;

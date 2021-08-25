@@ -37,13 +37,14 @@ export abstract class PaginateWorkflow<D, I extends IBaseHttpInput & { limit?: n
             const output = <O>{
                 data: {
                     message: `Select successfully`,
-                    entity: docs
+                    entities: docs
                 }
             }
 
             return output.data;
         }
         catch (error) {
+            this.log.error(error)
             throw this.errorFactory.unauthorizedError(`Workflow Error`);
         }
 
